@@ -3,7 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/samsung/NetBeansProjects/JavaApplication1/src/javaapplication1/JavaApplication1.java</file>
+            <file>file:/home/samsung/NetBeansProjects/JavaApplication1/src/model/BookManager.java</file>
+            <file>file:/home/samsung/NetBeansProjects/JavaApplication1/src/model/User.java</file>
+            <file>file:/home/samsung/NetBeansProjects/JavaApplication1/src/model/UserManager.java</file>
+            <file>file:/home/samsung/NetBeansProjects/JavaApplication1/src/model/Book.java</file>
+            <file>file:/home/samsung/NetBeansProjects/JavaApplication1/src/controller/LoginJframe.java</file>
+            <file>file:/home/samsung/NetBeansProjects/JavaApplication1/src/model/Validate.java</file>
         </group>
     </open-files>
 </project-private>

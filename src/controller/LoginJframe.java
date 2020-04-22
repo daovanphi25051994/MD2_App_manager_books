@@ -7,12 +7,15 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collections;
+import java.util.Comparator;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import model.Book;
 import model.BookManager;
+import model.NameComparator;
 import model.User;
 import model.UserManager;
 import model.Validate;
@@ -662,8 +665,14 @@ public class LoginJframe extends javax.swing.JFrame {
 
     private void sortByNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortByNameActionPerformed
                  
+        NameComparator nameComparator = new NameComparator();
+        Collections.sort(bookManager.listBook, nameComparator);
+                
+        showListBooks();
+                   
+    
     }//GEN-LAST:event_sortByNameActionPerformed
-    }
+    
     
     
     /**
