@@ -46,6 +46,7 @@ public class Book {
         this.amount = amount;
     }
     
+ 
    public String toString(){
        return "Name book : " + this.nameBook
                + " ; Author : " + this.author

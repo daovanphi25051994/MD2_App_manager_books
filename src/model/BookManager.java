@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class BookManager {
    private static BookManager bookManager;
-   private static final ArrayList<Book> listBook = new ArrayList<>();
+   public static ArrayList<Book> listBook = new ArrayList<>();
    
    private BookManager(){}
    
@@ -36,16 +36,8 @@ public class BookManager {
        if(book == null){
            return false;
        }
-       for(Book myBook : listBook){
-           if(myBook.equals(book)){
-               listBook.remove(book);
-               return true;
-           }
-       }
-     
-       return false;
+      listBook.remove(book);
+      return true;
    }
-    public ArrayList<Book> getListBooks(){
-        return listBook;
-    }
+   
 }

@@ -7,6 +7,9 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import model.Book;
 import model.BookManager;
@@ -27,6 +30,7 @@ public class LoginJframe extends javax.swing.JFrame {
     public LoginJframe() {
         initComponents();
         showListBooks();
+      //  getNameBook();
        
     }
 
@@ -60,6 +64,7 @@ public class LoginJframe extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         btnSearch = new javax.swing.JButton();
         searchField = new javax.swing.JTextField();
+        sortByName = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         book = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -69,6 +74,8 @@ public class LoginJframe extends javax.swing.JFrame {
         nameBookFeild = new javax.swing.JTextField();
         nameAuthorFeild = new javax.swing.JTextField();
         amountField = new javax.swing.JTextField();
+        btnSetBook = new javax.swing.JButton();
+        remove = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableBooks = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
@@ -215,16 +222,31 @@ public class LoginJframe extends javax.swing.JFrame {
         mainDialog.setModal(true);
 
         btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
+        sortByName.setText("Sort");
+        sortByName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sortByNameActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(searchField, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSearch))
+                .addContainerGap()
+                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(btnSearch)
+                .addGap(18, 18, 18)
+                .addComponent(sortByName)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,7 +254,8 @@ public class LoginJframe extends javax.swing.JFrame {
                 .addContainerGap(34, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSearch)
-                    .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sortByName))
                 .addGap(28, 28, 28))
         );
 
@@ -251,6 +274,20 @@ public class LoginJframe extends javax.swing.JFrame {
             }
         });
 
+        btnSetBook.setText("Set Book");
+        btnSetBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSetBookActionPerformed(evt);
+            }
+        });
+
+        remove.setText("Remove");
+        remove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -260,16 +297,23 @@ public class LoginJframe extends javax.swing.JFrame {
                 .addComponent(book)
                 .addGap(119, 119, 119))
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(remove)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(btnAdd)
-                        .addGap(0, 119, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSetBook)
+                        .addGap(0, 19, Short.MAX_VALUE))
                     .addComponent(amountField)
                     .addComponent(nameAuthorFeild)
                     .addComponent(nameBookFeild))
@@ -292,7 +336,10 @@ public class LoginJframe extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(amountField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
-                .addComponent(btnAdd)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdd)
+                    .addComponent(btnSetBook)
+                    .addComponent(remove))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
 
@@ -335,10 +382,11 @@ public class LoginJframe extends javax.swing.JFrame {
             .addGroup(mainDialogLayout.createSequentialGroup()
                 .addGroup(mainDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainDialogLayout.createSequentialGroup()
-                        .addGap(165, 165, 165)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(262, 262, 262)
+                        .addGap(770, 770, 770)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(mainDialogLayout.createSequentialGroup()
+                        .addGap(165, 165, 165)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(mainDialogLayout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -464,7 +512,8 @@ public class LoginJframe extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-            RegisterDialog.setVisible(true);
+        RegisterDialog.setSize(600, 600);
+        RegisterDialog.setVisible(true);
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
@@ -500,6 +549,7 @@ public class LoginJframe extends javax.swing.JFrame {
         for(User myUser : userManager.getListUser()){
             if (myUser.getEmail().equals(email) && myUser.getPassword().equals(password)) {
                 messageLogin.setText("Login access!!");
+                mainDialog.setSize(1000, 800);
                 mainDialog.setVisible(true);
             }else{
                 messageLogin.setText("Login faild!!");
@@ -512,21 +562,110 @@ public class LoginJframe extends javax.swing.JFrame {
         defaultTableModel.addColumn("Name book");
         defaultTableModel.addColumn("Name author");
         defaultTableModel.addColumn("Amount");
-        for (Book book : bookManager.getListBooks()) {
+        for (Book book : bookManager.listBook) {
             defaultTableModel.addRow(new Object[]{book.getName(), book.getAuthor(), book.getAmount()});
         }
-        
     }
-    
+   
+  /*  
+    public void getNameBook(){
+        ListSelectionModel listSelectionModel = tableBooks.getSelectionModel();
+        listSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        listSelectionModel.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int[] rows = tableBooks.getSelectedRows();
+                int[] cols = tableBooks.getSelectedColumns();
+               String nameBook = String.valueOf(tableBooks.getValueAt(rows[0], 0));
+                for(Book myBook : bookManager.listBook){
+                    if(myBook.getName().equals(nameBook)){
+                        nameBookFeild.setText(myBook.getName());
+                         nameAuthorFeild.setText(myBook.getAuthor());
+                         amountField.setText(String.valueOf(myBook.getAmount()));
+                    }
+                }
+            }
+        });
+    }
+    */
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        String name = nameBookFeild.getText();
+       
+        if((nameBookFeild.getText() == null) || (nameAuthorFeild.getText() == null) || (amountField.getText() == null) ){
+            return;
+        }
+         String name = nameBookFeild.getText();
         String author = nameAuthorFeild.getText();
         int amount = Integer.parseInt(amountField.getText());
+        for(Book myBook : bookManager.listBook){
+            if (myBook.getName().equals(name)) {
+                return;
+            }
+        }
         Book book = new Book(name, author, amount);
         bookManager.addBook(book);
         showListBooks();
+        nameBookFeild.setText("");
+        nameAuthorFeild.setText("");
+        amountField.setText("");
+        
     }//GEN-LAST:event_btnAddActionPerformed
 
+    private void btnSetBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetBookActionPerformed
+        String nameBook = nameBookFeild.getText();
+        String author = nameAuthorFeild.getText();
+        int amount = Integer.parseInt(amountField.getText());
+       
+        for(Book myBook : bookManager.listBook){
+            if(myBook.getName().equals(nameBook)){
+                myBook.setName(nameBook);
+                myBook.setAuthor(author);
+                myBook.setAmount(amount);
+                showListBooks();
+        nameBookFeild.setText("");
+        nameAuthorFeild.setText("");
+        amountField.setText("");
+        break;
+            }
+     }
+        
+    }//GEN-LAST:event_btnSetBookActionPerformed
+
+    private void removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeActionPerformed
+        String keyName = searchField.getText();
+        for(Book myBook : bookManager.listBook){
+            if (myBook.getName().equals(keyName)) {
+                bookManager.removeBook(myBook);
+                showListBooks();
+                nameBookFeild.setText("");
+                nameAuthorFeild.setText("");
+                amountField.setText("");
+                break;
+            }         
+        }
+    }//GEN-LAST:event_removeActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        String name = searchField.getText();
+        for(Book myBook : bookManager.listBook){
+            if (myBook.getName().equals(name)) {
+                DefaultTableModel defaultTableModel = new DefaultTableModel();
+        tableBooks.setModel(defaultTableModel);
+        defaultTableModel.addColumn("Name book");
+        defaultTableModel.addColumn("Name author");
+        defaultTableModel.addColumn("Amount");
+        defaultTableModel.addRow(new Object[]{myBook.getName(), myBook.getAuthor(), myBook.getAmount()});
+          break;
+         } else{
+                showListBooks();
+            }        
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void sortByNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortByNameActionPerformed
+                 
+    }//GEN-LAST:event_sortByNameActionPerformed
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -572,6 +711,7 @@ public class LoginJframe extends javax.swing.JFrame {
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnRegister;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnSetBook;
     private javax.swing.JLabel email;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -603,7 +743,9 @@ public class LoginJframe extends javax.swing.JFrame {
     private javax.swing.JPasswordField registerPassword1Field;
     private javax.swing.JPasswordField registerPassword2Field;
     private javax.swing.JTextField registerPhoneNumberField;
+    private javax.swing.JButton remove;
     private javax.swing.JTextField searchField;
+    private javax.swing.JButton sortByName;
     private javax.swing.JTable tableBooks;
     private javax.swing.JLabel tittle;
     // End of variables declaration//GEN-END:variables
