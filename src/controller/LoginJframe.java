@@ -7,6 +7,9 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.table.DefaultTableModel;
+import model.Book;
+import model.BookManager;
 import model.User;
 import model.UserManager;
 import model.Validate;
@@ -17,11 +20,13 @@ import model.Validate;
  */
 public class LoginJframe extends javax.swing.JFrame {
   UserManager userManager = UserManager.getUserManager();
+  BookManager bookManager = BookManager.getBookManager();
     /**
      * Creates new form LoginJframe
      */
     public LoginJframe() {
         initComponents();
+        showListBooks();
        
     }
 
@@ -52,6 +57,21 @@ public class LoginJframe extends javax.swing.JFrame {
         registerPassword2Field = new javax.swing.JPasswordField();
         message = new javax.swing.JLabel();
         mainDialog = new javax.swing.JDialog();
+        jPanel5 = new javax.swing.JPanel();
+        btnSearch = new javax.swing.JButton();
+        searchField = new javax.swing.JTextField();
+        jPanel6 = new javax.swing.JPanel();
+        book = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        btnAdd = new javax.swing.JButton();
+        nameBookFeild = new javax.swing.JTextField();
+        nameAuthorFeild = new javax.swing.JTextField();
+        amountField = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableBooks = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -194,15 +214,157 @@ public class LoginJframe extends javax.swing.JFrame {
         mainDialog.setTitle("Main Dialog");
         mainDialog.setModal(true);
 
+        btnSearch.setText("Search");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(searchField, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSearch))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(34, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSearch)
+                    .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28))
+        );
+
+        book.setText("Book");
+
+        jLabel6.setText("Name :");
+
+        jLabel7.setText("Author :");
+
+        jLabel8.setText("Amount :");
+
+        btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(book)
+                .addGap(119, 119, 119))
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(btnAdd)
+                        .addGap(0, 119, Short.MAX_VALUE))
+                    .addComponent(amountField)
+                    .addComponent(nameAuthorFeild)
+                    .addComponent(nameBookFeild))
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addComponent(book)
+                .addGap(32, 32, 32)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(nameBookFeild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(nameAuthorFeild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(amountField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(44, 44, 44)
+                .addComponent(btnAdd)
+                .addContainerGap(48, Short.MAX_VALUE))
+        );
+
+        tableBooks.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"sach 1", "a1",  new Integer(1)},
+                {"sach 2", "a2",  new Integer(2)},
+                {"sach 3", "a3",  new Integer(3)},
+                {"sach 4", "a4", null}
+            },
+            new String [] {
+                "Name book", "Author", "Amount"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tableBooks);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout mainDialogLayout = new javax.swing.GroupLayout(mainDialog.getContentPane());
         mainDialog.getContentPane().setLayout(mainDialogLayout);
         mainDialogLayout.setHorizontalGroup(
             mainDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(mainDialogLayout.createSequentialGroup()
+                .addGroup(mainDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(mainDialogLayout.createSequentialGroup()
+                        .addGap(165, 165, 165)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(262, 262, 262)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(mainDialogLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(86, 86, 86)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         mainDialogLayout.setVerticalGroup(
             mainDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(mainDialogLayout.createSequentialGroup()
+                .addGroup(mainDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(mainDialogLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(mainDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(mainDialogLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(mainDialogLayout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(mainDialogLayout.createSequentialGroup()
+                        .addGap(449, 449, 449)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -338,11 +500,32 @@ public class LoginJframe extends javax.swing.JFrame {
         for(User myUser : userManager.getListUser()){
             if (myUser.getEmail().equals(email) && myUser.getPassword().equals(password)) {
                 messageLogin.setText("Login access!!");
+                mainDialog.setVisible(true);
             }else{
                 messageLogin.setText("Login faild!!");
             }
         }
     }//GEN-LAST:event_btnLoginActionPerformed
+    public void showListBooks(){
+        DefaultTableModel defaultTableModel = new DefaultTableModel();
+        tableBooks.setModel(defaultTableModel);
+        defaultTableModel.addColumn("Name book");
+        defaultTableModel.addColumn("Name author");
+        defaultTableModel.addColumn("Amount");
+        for (Book book : bookManager.getListBooks()) {
+            defaultTableModel.addRow(new Object[]{book.getName(), book.getAuthor(), book.getAmount()});
+        }
+        
+    }
+    
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        String name = nameBookFeild.getText();
+        String author = nameAuthorFeild.getText();
+        int amount = Integer.parseInt(amountField.getText());
+        Book book = new Book(name, author, amount);
+        bookManager.addBook(book);
+        showListBooks();
+    }//GEN-LAST:event_btnAddActionPerformed
 
     /**
      * @param args the command line arguments
@@ -374,7 +557,8 @@ public class LoginJframe extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LoginJframe().setVisible(true);
+               LoginJframe frame =  new LoginJframe();
+               frame.setVisible(true);
             }
         });
     }
@@ -382,21 +566,34 @@ public class LoginJframe extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog RegisterDialog;
     private javax.swing.JLabel address;
+    private javax.swing.JTextField amountField;
+    private javax.swing.JLabel book;
+    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnRegister;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JLabel email;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton loginBtn;
     private javax.swing.JTextField loginEmailField;
     private javax.swing.JPasswordField loginPassword1Field;
     private javax.swing.JDialog mainDialog;
     private javax.swing.JLabel message;
     private javax.swing.JLabel messageLogin;
+    private javax.swing.JTextField nameAuthorFeild;
+    private javax.swing.JTextField nameBookFeild;
     private javax.swing.JLabel password1;
     private javax.swing.JLabel password2;
     private javax.swing.JLabel phoneNumber;
@@ -406,6 +603,8 @@ public class LoginJframe extends javax.swing.JFrame {
     private javax.swing.JPasswordField registerPassword1Field;
     private javax.swing.JPasswordField registerPassword2Field;
     private javax.swing.JTextField registerPhoneNumberField;
+    private javax.swing.JTextField searchField;
+    private javax.swing.JTable tableBooks;
     private javax.swing.JLabel tittle;
     // End of variables declaration//GEN-END:variables
 }
