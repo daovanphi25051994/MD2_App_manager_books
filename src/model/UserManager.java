@@ -48,4 +48,13 @@ public class UserManager {
         return listUser;
     }
     
+    public boolean isUserExist(String email){
+        for(User user : listUser){
+            if (user.getEmail().equals(email)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
 }
