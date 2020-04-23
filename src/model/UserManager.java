@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class UserManager {
    private static UserManager userManager;
-   private static final ArrayList<User> listUser = new ArrayList<>();
+   public static final ArrayList<User> listUser = new ArrayList<>();
    private UserManager(){}
    
    public static UserManager getUserManager(){
@@ -44,9 +44,9 @@ public class UserManager {
      
        return false;
    }
-    public ArrayList<User> getListUser(){
-        return listUser;
-    }
+//    public ArrayList<User> getListUser(){
+//        return listUser;
+//    }
     
     public boolean isUserExist(String email){
         for(User user : listUser){

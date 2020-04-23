@@ -5,11 +5,13 @@
  */
 package model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author samsung
  */
-public class User {
+public class User implements Serializable {
     private String email;
     private String password;
     private String phoneNumber;

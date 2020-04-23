@@ -20,6 +20,7 @@ import model.AmountComparator;
 import model.AuthorComparator;
 import model.Book;
 import model.BookManager;
+import model.FileService;
 import model.NameComparator;
 import model.User;
 import model.UserManager;
@@ -27,17 +28,27 @@ import model.Validate;
 
 public class LoginJframe extends javax.swing.JFrame {
 
-    UserManager userManager = UserManager.getUserManager();
-    BookManager bookManager = BookManager.getBookManager();
-    Validate validate = new Validate();
-    
+    private UserManager userManager = UserManager.getUserManager();
+    private BookManager bookManager = BookManager.getBookManager();
+    private Validate validate = new Validate();
+    private FileService fileService = new FileService();
+    public static final String BOOK_DATA_PATH = "/home/samsung/NetBeansProjects/JavaApplication1/book_data2.txt";
+    public static final String USER_DATA_PATH = "/home/samsung/NetBeansProjects/JavaApplication1/user_data2.txt";
+    public static final String NAME_BOOK_LABEL = "Name book";
+    public static final String NAME_AUTHOR_LABEL = "Name Author";
+    public static final String AMOUNT_LABEL = "Amount";
+    public static final String REGISTER_SUCCESS_MESSAGE = "Register Success!!";
+    public static final String REGISTER_FAILED_MESSAGE = "Register Failed!!";
+    public static final String LOGIN_SUCCESS_MESSAGE = "Login Success!!";
+    public static final String LOGIN_FAILED_MESSAGE = "Login Failed!!";
+    public static final String BOOK_GENERIC_MESSAGE = "Book Generic: ";
+    public static final String BOOK_AMOUNT_MESSAGE = "Book amount sum: ";
 
     public LoginJframe() {
         initComponents();
         addListBookFromDataToArray();
         showListBooks();
-//        addListBookFromDataToArray();
-//        showListBooks();
+        fileService.writeFileUserToArray(userManager.listUser, USER_DATA_PATH);
     }
 
     @SuppressWarnings("unchecked")
@@ -636,22 +647,22 @@ public class LoginJframe extends javax.swing.JFrame {
     public void showListBooks() {
         DefaultTableModel defaultTableModel = new DefaultTableModel();
         tableBooks.setModel(defaultTableModel);
-        defaultTableModel.addColumn("Name book");
-        defaultTableModel.addColumn("Name author");
-        defaultTableModel.addColumn("Amount");
+        defaultTableModel.addColumn(NAME_BOOK_LABEL);
+        defaultTableModel.addColumn(NAME_AUTHOR_LABEL);
+        defaultTableModel.addColumn(AMOUNT_LABEL);
         for (Book book : bookManager.listBook) {
             defaultTableModel.addRow(new Object[]{book.getName(), book.getAuthor(), book.getAmount()});
         }
     }
 
-    public void addListBookFromDataToArray(){
+    public void addListBookFromDataToArray() {
         FileInputStream fileInputStream = null;
         ObjectInputStream objectInputStream = null;
-        try{
-            fileInputStream = new FileInputStream("/home/samsung/NetBeansProjects/JavaApplication1/book_data2.txt");
+        try {
+            fileInputStream = new FileInputStream(BOOK_DATA_PATH);
             objectInputStream = new ObjectInputStream(fileInputStream);
             Book book;
-            while((book = (Book) objectInputStream.readObject()) != null){
+            while ((book = (Book) objectInputStream.readObject()) != null) {
                 bookManager.addBook(book);
             }
         } catch (FileNotFoundException ex) {
@@ -660,17 +671,16 @@ public class LoginJframe extends javax.swing.JFrame {
             Logger.getLogger(LoginJframe.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(LoginJframe.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
+        } finally {
             try {
                 objectInputStream.close();
                 fileInputStream.close();
             } catch (IOException ex) {
                 Logger.getLogger(LoginJframe.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-        }     
+        }
     }
-        
+
     public String[] getBookDataFromUser() {
         String nameBook = nameBookFeild.getText();
         String author = nameAuthorFeild.getText();
@@ -704,24 +714,25 @@ public class LoginJframe extends javax.swing.JFrame {
         if (isUser && !userManager.isUserExist(email)) {
             User user = new User(email, password1, phoneNumber, address);
             userManager.addUser(user);
-            message.setText("Register Success!!");
+            fileService.saveUserToFile(userManager.listUser, USER_DATA_PATH);
+            message.setText(REGISTER_SUCCESS_MESSAGE);
         } else {
-            message.setText("Register Failed!!");
+            message.setText(REGISTER_FAILED_MESSAGE);
         }
     }//GEN-LAST:event_registerActionPerformed
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         String email = loginEmailField.getText();
         String password = String.valueOf(loginPassword1Field.getPassword());
-        for (User myUser : userManager.getListUser()) {
+        for (User myUser : userManager.listUser) {
             if (myUser.getEmail().equals(email) && myUser.getPassword().equals(password)) {
-                messageLogin.setText("Login Success!!");
+                messageLogin.setText(LOGIN_SUCCESS_MESSAGE);
                 mainDialog.setSize(1200, 800);
-                mainDialog.setVisible(true);   
+                mainDialog.setVisible(true);
                 return;
             }
         }
-        messageLogin.setText("Login Failed!!");
+        messageLogin.setText(LOGIN_FAILED_MESSAGE);
     }//GEN-LAST:event_loginActionPerformed
 
     private void addBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBookActionPerformed
@@ -772,9 +783,9 @@ public class LoginJframe extends javax.swing.JFrame {
             if (myBook.getName().equals(name)) {
                 DefaultTableModel defaultTableModel = new DefaultTableModel();
                 tableBooks.setModel(defaultTableModel);
-                defaultTableModel.addColumn("Name book");
-                defaultTableModel.addColumn("Name author");
-                defaultTableModel.addColumn("Amount");
+                defaultTableModel.addColumn(NAME_BOOK_LABEL);
+                defaultTableModel.addColumn(NAME_AUTHOR_LABEL);
+                defaultTableModel.addColumn(AMOUNT_LABEL);
                 defaultTableModel.addRow(new Object[]{myBook.getName(), myBook.getAuthor(), myBook.getAmount()});
                 nameBookFeild.setText(myBook.getName());
                 nameAuthorFeild.setText(myBook.getAuthor());
@@ -800,9 +811,9 @@ public class LoginJframe extends javax.swing.JFrame {
         String author = searchField.getText();
         DefaultTableModel defaultTableModel = new DefaultTableModel();
         tableBooks.setModel(defaultTableModel);
-        defaultTableModel.addColumn("Name book");
-        defaultTableModel.addColumn("Name author");
-        defaultTableModel.addColumn("Amount");
+        defaultTableModel.addColumn(NAME_BOOK_LABEL);
+        defaultTableModel.addColumn(NAME_AUTHOR_LABEL);
+        defaultTableModel.addColumn(AMOUNT_LABEL);
         boolean isAuthor = false;
         for (Book myBook : bookManager.listBook) {
             if (myBook.getAuthor().equals(author)) {
@@ -826,7 +837,7 @@ public class LoginJframe extends javax.swing.JFrame {
     }//GEN-LAST:event_reverseListBookActionPerformed
 
     private void getGenericActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getGenericActionPerformed
-        String messageContent = "Book Generic: ";
+        String messageContent = BOOK_GENERIC_MESSAGE;
         messageContent += String.valueOf(bookManager.listBook.size());
         messageMain.setText(messageContent);
     }//GEN-LAST:event_getGenericActionPerformed
@@ -836,7 +847,7 @@ public class LoginJframe extends javax.swing.JFrame {
         for (Book book : bookManager.listBook) {
             amountSum += book.getAmount();
         }
-        String messageContent = "Book amount sum: ";
+        String messageContent = BOOK_AMOUNT_MESSAGE;
         messageContent += String.valueOf(amountSum);
         messageMain.setText(messageContent);
     }//GEN-LAST:event_getAmountSumActionPerformed
@@ -845,7 +856,7 @@ public class LoginJframe extends javax.swing.JFrame {
         FileOutputStream fileOutputStream = null;
         ObjectOutputStream objectOutputStream = null;
         try {
-            fileOutputStream = new FileOutputStream("/home/samsung/NetBeansProjects/JavaApplication1/book_data2.txt");
+            fileOutputStream = new FileOutputStream(BOOK_DATA_PATH);
             objectOutputStream = new ObjectOutputStream(fileOutputStream);
             for (Book book : bookManager.listBook) {
                 objectOutputStream.writeObject(book);
