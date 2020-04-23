@@ -2,8 +2,16 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -22,10 +30,14 @@ public class LoginJframe extends javax.swing.JFrame {
     UserManager userManager = UserManager.getUserManager();
     BookManager bookManager = BookManager.getBookManager();
     Validate validate = new Validate();
+    
 
     public LoginJframe() {
         initComponents();
+        addListBookFromDataToArray();
         showListBooks();
+//        addListBookFromDataToArray();
+//        showListBooks();
     }
 
     @SuppressWarnings("unchecked")
@@ -76,6 +88,7 @@ public class LoginJframe extends javax.swing.JFrame {
         getGeneric = new javax.swing.JButton();
         getAmountSum = new javax.swing.JButton();
         messageMain = new javax.swing.JLabel();
+        saveBookData = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -243,7 +256,7 @@ public class LoginJframe extends javax.swing.JFrame {
                 .addComponent(searchBook)
                 .addGap(18, 18, 18)
                 .addComponent(searchAuthor)
-                .addContainerGap(297, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -452,7 +465,7 @@ public class LoginJframe extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addComponent(messageMain)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(getAmountSum)
                     .addComponent(getGeneric))
@@ -473,36 +486,48 @@ public class LoginJframe extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        saveBookData.setText("Save");
+        saveBookData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveBookDataActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout mainDialogLayout = new javax.swing.GroupLayout(mainDialog.getContentPane());
         mainDialog.getContentPane().setLayout(mainDialogLayout);
         mainDialogLayout.setHorizontalGroup(
             mainDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainDialogLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(mainDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(mainDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainDialogLayout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(232, 232, 232)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(157, Short.MAX_VALUE))
                     .addGroup(mainDialogLayout.createSequentialGroup()
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(72, 72, 72)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(saveBookData)
+                        .addGap(30, 30, 30))))
         );
         mainDialogLayout.setVerticalGroup(
             mainDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainDialogLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(mainDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainDialogLayout.createSequentialGroup()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainDialogLayout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
+                        .addContainerGap()
+                        .addGroup(mainDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(mainDialogLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(saveBookData)))
+                .addGap(26, 26, 26)
                 .addGroup(mainDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -619,6 +644,33 @@ public class LoginJframe extends javax.swing.JFrame {
         }
     }
 
+    public void addListBookFromDataToArray(){
+        FileInputStream fileInputStream = null;
+        ObjectInputStream objectInputStream = null;
+        try{
+            fileInputStream = new FileInputStream("/home/samsung/NetBeansProjects/JavaApplication1/book_data2.txt");
+            objectInputStream = new ObjectInputStream(fileInputStream);
+            Book book;
+            while((book = (Book) objectInputStream.readObject()) != null){
+                bookManager.addBook(book);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(LoginJframe.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginJframe.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LoginJframe.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            try {
+                objectInputStream.close();
+                fileInputStream.close();
+            } catch (IOException ex) {
+                Logger.getLogger(LoginJframe.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }     
+    }
+        
     public String[] getBookDataFromUser() {
         String nameBook = nameBookFeild.getText();
         String author = nameAuthorFeild.getText();
@@ -632,7 +684,7 @@ public class LoginJframe extends javax.swing.JFrame {
         nameAuthorFeild.setText("");
         amountField.setText("");
     }
-    
+
     private void goRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goRegisterActionPerformed
         RegisterDialog.setSize(750, 670);
         RegisterDialog.setVisible(true);
@@ -665,7 +717,7 @@ public class LoginJframe extends javax.swing.JFrame {
             if (myUser.getEmail().equals(email) && myUser.getPassword().equals(password)) {
                 messageLogin.setText("Login Success!!");
                 mainDialog.setSize(1200, 800);
-                mainDialog.setVisible(true);
+                mainDialog.setVisible(true);   
                 return;
             }
         }
@@ -789,6 +841,29 @@ public class LoginJframe extends javax.swing.JFrame {
         messageMain.setText(messageContent);
     }//GEN-LAST:event_getAmountSumActionPerformed
 
+    private void saveBookDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBookDataActionPerformed
+        FileOutputStream fileOutputStream = null;
+        ObjectOutputStream objectOutputStream = null;
+        try {
+            fileOutputStream = new FileOutputStream("/home/samsung/NetBeansProjects/JavaApplication1/book_data2.txt");
+            objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            for (Book book : bookManager.listBook) {
+                objectOutputStream.writeObject(book);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(LoginJframe.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginJframe.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                objectOutputStream.close();
+                fileOutputStream.close();
+            } catch (IOException ex) {
+                Logger.getLogger(LoginJframe.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_saveBookDataActionPerformed
+
     public static void main(String args[]) {
 
         try {
@@ -864,6 +939,7 @@ public class LoginJframe extends javax.swing.JFrame {
     private javax.swing.JTextField registerPhoneNumberField;
     private javax.swing.JButton removeBook;
     private javax.swing.JButton reverseListBook;
+    private javax.swing.JButton saveBookData;
     private javax.swing.JButton searchAuthor;
     private javax.swing.JButton searchBook;
     private javax.swing.JTextField searchField;
