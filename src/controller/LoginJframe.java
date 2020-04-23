@@ -1,4 +1,3 @@
-
 package controller;
 
 import java.awt.event.ActionEvent;
@@ -18,20 +17,17 @@ import model.User;
 import model.UserManager;
 import model.Validate;
 
-
 public class LoginJframe extends javax.swing.JFrame {
 
     UserManager userManager = UserManager.getUserManager();
     BookManager bookManager = BookManager.getBookManager();
+    Validate validate = new Validate();
 
-    
     public LoginJframe() {
         initComponents();
         showListBooks();
-
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -49,13 +45,13 @@ public class LoginJframe extends javax.swing.JFrame {
         registerPhoneNumberField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         registerAddressField = new javax.swing.JTextArea();
-        loginBtn = new javax.swing.JButton();
-        registerBtn = new javax.swing.JButton();
+        backLogin = new javax.swing.JButton();
+        register = new javax.swing.JButton();
         registerPassword2Field = new javax.swing.JPasswordField();
         message = new javax.swing.JLabel();
         mainDialog = new javax.swing.JDialog();
         jPanel5 = new javax.swing.JPanel();
-        btnSearch = new javax.swing.JButton();
+        searchBook = new javax.swing.JButton();
         searchField = new javax.swing.JTextField();
         searchAuthor = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
@@ -63,22 +59,22 @@ public class LoginJframe extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        btnAdd = new javax.swing.JButton();
+        addBook = new javax.swing.JButton();
         nameBookFeild = new javax.swing.JTextField();
         nameAuthorFeild = new javax.swing.JTextField();
         amountField = new javax.swing.JTextField();
-        btnSetBook = new javax.swing.JButton();
-        remove = new javax.swing.JButton();
-        btnSortAuthor = new javax.swing.JButton();
-        btnSortAmount = new javax.swing.JButton();
+        setBook = new javax.swing.JButton();
+        removeBook = new javax.swing.JButton();
+        sortByAuthor = new javax.swing.JButton();
+        sortByAmount = new javax.swing.JButton();
         sortByName = new javax.swing.JButton();
-        btnReverse = new javax.swing.JButton();
+        reverseListBook = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableBooks = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         getGeneric = new javax.swing.JButton();
-        btnShowAmount = new javax.swing.JButton();
+        getAmountSum = new javax.swing.JButton();
         messageMain = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -86,8 +82,8 @@ public class LoginJframe extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         loginEmailField = new javax.swing.JTextField();
         loginPassword1Field = new javax.swing.JPasswordField();
-        btnLogin = new javax.swing.JButton();
-        btnRegister = new javax.swing.JButton();
+        login = new javax.swing.JButton();
+        goRegister = new javax.swing.JButton();
         messageLogin = new javax.swing.JLabel();
 
         RegisterDialog.setTitle("Register");
@@ -97,7 +93,7 @@ public class LoginJframe extends javax.swing.JFrame {
 
         password1.setText("Password :");
 
-        password2.setText(" Password :");
+        password2.setText("Password :");
 
         tittle.setText("Register Form");
 
@@ -109,17 +105,17 @@ public class LoginJframe extends javax.swing.JFrame {
         registerAddressField.setRows(5);
         jScrollPane1.setViewportView(registerAddressField);
 
-        loginBtn.setText("Login");
-        loginBtn.addActionListener(new java.awt.event.ActionListener() {
+        backLogin.setText("Login");
+        backLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginBtnActionPerformed(evt);
+                backLoginActionPerformed(evt);
             }
         });
 
-        registerBtn.setText("Register");
-        registerBtn.addActionListener(new java.awt.event.ActionListener() {
+        register.setText("Register");
+        register.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registerBtnActionPerformed(evt);
+                registerActionPerformed(evt);
             }
         });
 
@@ -142,9 +138,9 @@ public class LoginJframe extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(registerBtn)
+                                        .addComponent(register)
                                         .addGap(67, 67, 67)
-                                        .addComponent(loginBtn)
+                                        .addComponent(backLogin)
                                         .addGap(88, 88, 88))
                                     .addComponent(jScrollPane1)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -195,8 +191,8 @@ public class LoginJframe extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(registerBtn)
-                            .addComponent(loginBtn))
+                            .addComponent(register)
+                            .addComponent(backLogin))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(message)
                         .addGap(6, 6, 6))))
@@ -206,26 +202,26 @@ public class LoginJframe extends javax.swing.JFrame {
         RegisterDialog.getContentPane().setLayout(RegisterDialogLayout);
         RegisterDialogLayout.setHorizontalGroup(
             RegisterDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RegisterDialogLayout.createSequentialGroup()
-                .addContainerGap(123, Short.MAX_VALUE)
+            .addGroup(RegisterDialogLayout.createSequentialGroup()
+                .addGap(82, 82, 82)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(85, 85, 85))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
         RegisterDialogLayout.setVerticalGroup(
             RegisterDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(RegisterDialogLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(35, 35, 35)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         mainDialog.setTitle("Main Dialog");
         mainDialog.setModal(true);
 
-        btnSearch.setText("Search Book");
-        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+        searchBook.setText("Search Book");
+        searchBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchActionPerformed(evt);
+                searchBookActionPerformed(evt);
             }
         });
 
@@ -244,7 +240,7 @@ public class LoginJframe extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
-                .addComponent(btnSearch)
+                .addComponent(searchBook)
                 .addGap(18, 18, 18)
                 .addComponent(searchAuthor)
                 .addContainerGap(297, Short.MAX_VALUE))
@@ -254,7 +250,7 @@ public class LoginJframe extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(34, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSearch)
+                    .addComponent(searchBook)
                     .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchAuthor))
                 .addGap(28, 28, 28))
@@ -268,38 +264,38 @@ public class LoginJframe extends javax.swing.JFrame {
 
         jLabel8.setText("Amount :");
 
-        btnAdd.setText("Add");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+        addBook.setText("Add");
+        addBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
+                addBookActionPerformed(evt);
             }
         });
 
-        btnSetBook.setText("Set Book");
-        btnSetBook.addActionListener(new java.awt.event.ActionListener() {
+        setBook.setText("Set Book");
+        setBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSetBookActionPerformed(evt);
+                setBookActionPerformed(evt);
             }
         });
 
-        remove.setText("Remove");
-        remove.addActionListener(new java.awt.event.ActionListener() {
+        removeBook.setText("Remove");
+        removeBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeActionPerformed(evt);
+                removeBookActionPerformed(evt);
             }
         });
 
-        btnSortAuthor.setText("Sort Author");
-        btnSortAuthor.addActionListener(new java.awt.event.ActionListener() {
+        sortByAuthor.setText("Sort Author");
+        sortByAuthor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSortAuthorActionPerformed(evt);
+                sortByAuthorActionPerformed(evt);
             }
         });
 
-        btnSortAmount.setText("Sort Amount");
-        btnSortAmount.addActionListener(new java.awt.event.ActionListener() {
+        sortByAmount.setText("Sort Amount");
+        sortByAmount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSortAmountActionPerformed(evt);
+                sortByAmountActionPerformed(evt);
             }
         });
 
@@ -310,10 +306,10 @@ public class LoginJframe extends javax.swing.JFrame {
             }
         });
 
-        btnReverse.setText("Reverse");
-        btnReverse.addActionListener(new java.awt.event.ActionListener() {
+        reverseListBook.setText("Reverse");
+        reverseListBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReverseActionPerformed(evt);
+                reverseListBookActionPerformed(evt);
             }
         });
 
@@ -335,13 +331,13 @@ public class LoginJframe extends javax.swing.JFrame {
                             .addComponent(jLabel8)))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(remove)))
+                        .addComponent(removeBook)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(btnAdd)
+                        .addComponent(addBook)
                         .addGap(18, 18, 18)
-                        .addComponent(btnSetBook)
+                        .addComponent(setBook)
                         .addGap(0, 109, Short.MAX_VALUE))
                     .addComponent(amountField)
                     .addComponent(nameAuthorFeild)
@@ -353,12 +349,12 @@ public class LoginJframe extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(sortByName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSortAuthor)
+                        .addComponent(sortByAuthor)
                         .addGap(18, 18, 18)
-                        .addComponent(btnSortAmount))
+                        .addComponent(sortByAmount))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(142, 142, 142)
-                        .addComponent(btnReverse)))
+                        .addComponent(reverseListBook)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -379,16 +375,16 @@ public class LoginJframe extends javax.swing.JFrame {
                     .addComponent(amountField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd)
-                    .addComponent(btnSetBook)
-                    .addComponent(remove))
+                    .addComponent(addBook)
+                    .addComponent(setBook)
+                    .addComponent(removeBook))
                 .addGap(39, 39, 39)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSortAuthor)
-                    .addComponent(btnSortAmount)
+                    .addComponent(sortByAuthor)
+                    .addComponent(sortByAmount)
                     .addComponent(sortByName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addComponent(btnReverse))
+                .addComponent(reverseListBook))
         );
 
         tableBooks.setModel(new javax.swing.table.DefaultTableModel(
@@ -442,10 +438,10 @@ public class LoginJframe extends javax.swing.JFrame {
             }
         });
 
-        btnShowAmount.setText("Show Amount");
-        btnShowAmount.addActionListener(new java.awt.event.ActionListener() {
+        getAmountSum.setText("Show Amount");
+        getAmountSum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnShowAmountActionPerformed(evt);
+                getAmountSumActionPerformed(evt);
             }
         });
 
@@ -458,7 +454,7 @@ public class LoginJframe extends javax.swing.JFrame {
                 .addComponent(messageMain)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnShowAmount)
+                    .addComponent(getAmountSum)
                     .addComponent(getGeneric))
                 .addGap(24, 24, 24))
         );
@@ -470,7 +466,7 @@ public class LoginJframe extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(getGeneric)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnShowAmount))
+                        .addComponent(getAmountSum))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addComponent(messageMain)))
@@ -482,19 +478,18 @@ public class LoginJframe extends javax.swing.JFrame {
         mainDialogLayout.setHorizontalGroup(
             mainDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainDialogLayout.createSequentialGroup()
-                .addGroup(mainDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(28, 28, 28)
+                .addGroup(mainDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(mainDialogLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(210, 210, 210)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(232, 232, 232)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(mainDialogLayout.createSequentialGroup()
-                        .addGap(28, 28, 28)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         mainDialogLayout.setVerticalGroup(
@@ -502,9 +497,12 @@ public class LoginJframe extends javax.swing.JFrame {
             .addGroup(mainDialogLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(mainDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                    .addGroup(mainDialogLayout.createSequentialGroup()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainDialogLayout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addGroup(mainDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -523,18 +521,18 @@ public class LoginJframe extends javax.swing.JFrame {
 
         jLabel1.setText("Login Form");
 
-        btnLogin.setText("Login");
-        btnLogin.setToolTipText("");
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+        login.setText("Login");
+        login.setToolTipText("");
+        login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
+                loginActionPerformed(evt);
             }
         });
 
-        btnRegister.setText("Register");
-        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+        goRegister.setText("Register");
+        goRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegisterActionPerformed(evt);
+                goRegisterActionPerformed(evt);
             }
         });
 
@@ -544,9 +542,9 @@ public class LoginJframe extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnLogin)
+                .addComponent(login)
                 .addGap(51, 51, 51)
-                .addComponent(btnRegister)
+                .addComponent(goRegister)
                 .addGap(92, 92, 92))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(82, Short.MAX_VALUE)
@@ -583,8 +581,8 @@ public class LoginJframe extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnRegister)
-                            .addComponent(btnLogin))
+                            .addComponent(goRegister)
+                            .addComponent(login))
                         .addGap(49, 49, 49)))
                 .addComponent(messageLogin)
                 .addGap(95, 95, 95))
@@ -610,45 +608,6 @@ public class LoginJframe extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        RegisterDialog.setSize(1000, 800);
-        RegisterDialog.setVisible(true);
-    }//GEN-LAST:event_btnRegisterActionPerformed
-
-    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
-        RegisterDialog.setVisible(false);
-    }//GEN-LAST:event_loginBtnActionPerformed
-
-    private void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtnActionPerformed
-        String email = registerEmailField.getText();
-        String password1 = String.valueOf(registerPassword1Field.getPassword());
-        String password2 = String.valueOf(registerPassword2Field.getPassword());
-        String phoneNumber = registerPhoneNumberField.getText();
-        String address = registerAddressField.getText();
-        Validate validate = new Validate();
-        boolean isUser = validate.isUser(email, password1, password2, phoneNumber);
-        if (isUser && !userManager.isUserExist(email)) {
-            User user = new User(email, password1, phoneNumber, address);
-            userManager.addUser(user);
-            message.setText("Register Success!!");
-        } else {
-            message.setText("Register Failed!!");
-        }
-    }//GEN-LAST:event_registerBtnActionPerformed
-
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        String email = loginEmailField.getText();
-        String password = String.valueOf(loginPassword1Field.getPassword());
-        for (User myUser : userManager.getListUser()) {
-            if (myUser.getEmail().equals(email) && myUser.getPassword().equals(password)) {
-                messageLogin.setText("Login Success!!");
-                mainDialog.setSize(1000, 800);
-                mainDialog.setVisible(true);
-            } else {
-                messageLogin.setText("Login Failed!!");
-            }
-        }
-    }//GEN-LAST:event_btnLoginActionPerformed
     public void showListBooks() {
         DefaultTableModel defaultTableModel = new DefaultTableModel();
         tableBooks.setModel(defaultTableModel);
@@ -660,53 +619,90 @@ public class LoginJframe extends javax.swing.JFrame {
         }
     }
 
-
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-
-        String name = nameBookFeild.getText();
+    public String[] getBookDataFromUser() {
+        String nameBook = nameBookFeild.getText();
         String author = nameAuthorFeild.getText();
         String amount = amountField.getText();
-        Validate validate = new Validate();
-        boolean isBook = validate.isBook(name, author, amount);
-        if (isBook) {
-            if (bookManager.isBookExist(name)) {
-                return;
-            }
-            Book book = new Book(name, author, Integer.parseInt(amount));
-            bookManager.addBook(book);
-            showListBooks();
-            resetBookFiled();
-        }
-
-    }//GEN-LAST:event_btnAddActionPerformed
+        String[] bookData = {nameBook, author, amount};
+        return bookData;
+    }
 
     public void resetBookFiled() {
         nameBookFeild.setText("");
         nameAuthorFeild.setText("");
         amountField.setText("");
     }
+    
+    private void goRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goRegisterActionPerformed
+        RegisterDialog.setSize(750, 670);
+        RegisterDialog.setVisible(true);
+    }//GEN-LAST:event_goRegisterActionPerformed
 
-    private void btnSetBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetBookActionPerformed
-        String nameBook = nameBookFeild.getText();
-        String author = nameAuthorFeild.getText();
-        String amount = amountField.getText();
-        Validate validate = new Validate();
-        boolean isBook = validate.isBook(nameBook, author, amount);
+    private void backLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backLoginActionPerformed
+        RegisterDialog.setVisible(false);
+    }//GEN-LAST:event_backLoginActionPerformed
+
+    private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
+        String email = registerEmailField.getText();
+        String password1 = String.valueOf(registerPassword1Field.getPassword());
+        String password2 = String.valueOf(registerPassword2Field.getPassword());
+        String phoneNumber = registerPhoneNumberField.getText();
+        String address = registerAddressField.getText();
+        boolean isUser = validate.isUser(email, password1, password2, phoneNumber);
+        if (isUser && !userManager.isUserExist(email)) {
+            User user = new User(email, password1, phoneNumber, address);
+            userManager.addUser(user);
+            message.setText("Register Success!!");
+        } else {
+            message.setText("Register Failed!!");
+        }
+    }//GEN-LAST:event_registerActionPerformed
+
+    private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
+        String email = loginEmailField.getText();
+        String password = String.valueOf(loginPassword1Field.getPassword());
+        for (User myUser : userManager.getListUser()) {
+            if (myUser.getEmail().equals(email) && myUser.getPassword().equals(password)) {
+                messageLogin.setText("Login Success!!");
+                mainDialog.setSize(1200, 800);
+                mainDialog.setVisible(true);
+                return;
+            }
+        }
+        messageLogin.setText("Login Failed!!");
+    }//GEN-LAST:event_loginActionPerformed
+
+    private void addBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBookActionPerformed
+        String[] bookData = getBookDataFromUser();
+        boolean isBook = validate.isBook(bookData[0], bookData[1], bookData[2]);
+        if (isBook) {
+            if (bookManager.isBookExist(bookData[0])) {
+                return;
+            }
+            Book book = new Book(bookData[0], bookData[1], Integer.parseInt(bookData[2]));
+            bookManager.addBook(book);
+            showListBooks();
+            resetBookFiled();
+        }
+    }//GEN-LAST:event_addBookActionPerformed
+
+    private void setBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setBookActionPerformed
+        String[] bookData = getBookDataFromUser();
+        boolean isBook = validate.isBook(bookData[0], bookData[1], bookData[2]);
         if (isBook) {
             for (Book myBook : bookManager.listBook) {
-                if (myBook.getName().equals(nameBook)) {
-                    myBook.setAuthor(author);
-                    myBook.setAmount(Integer.parseInt(amount));
+                if (myBook.getName().equals(bookData[0])) {
+                    myBook.setAuthor(bookData[1]);
+                    myBook.setAmount(Integer.parseInt(bookData[2]));
                     showListBooks();
                     resetBookFiled();
                     break;
                 }
             }
         }
+    }//GEN-LAST:event_setBookActionPerformed
 
-    }//GEN-LAST:event_btnSetBookActionPerformed
-
-    private void removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeActionPerformed
+    private void removeBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeBookActionPerformed
         String keyName = nameBookFeild.getText();
         for (Book myBook : bookManager.listBook) {
             if (myBook.getName().equals(keyName)) {
@@ -716,9 +712,9 @@ public class LoginJframe extends javax.swing.JFrame {
                 break;
             }
         }
-    }//GEN-LAST:event_removeActionPerformed
+    }//GEN-LAST:event_removeBookActionPerformed
 
-    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+    private void searchBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBookActionPerformed
         String name = searchField.getText();
         for (Book myBook : bookManager.listBook) {
             if (myBook.getName().equals(name)) {
@@ -736,17 +732,17 @@ public class LoginJframe extends javax.swing.JFrame {
                 showListBooks();
             }
         }
-    }//GEN-LAST:event_btnSearchActionPerformed
+    }//GEN-LAST:event_searchBookActionPerformed
 
     private void sortByNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortByNameActionPerformed
         Collections.sort(bookManager.listBook, new NameComparator());
         showListBooks();
     }//GEN-LAST:event_sortByNameActionPerformed
 
-    private void btnSortAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSortAuthorActionPerformed
+    private void sortByAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortByAuthorActionPerformed
         Collections.sort(bookManager.listBook, new AuthorComparator());
         showListBooks();
-    }//GEN-LAST:event_btnSortAuthorActionPerformed
+    }//GEN-LAST:event_sortByAuthorActionPerformed
 
     private void searchAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchAuthorActionPerformed
         String author = searchField.getText();
@@ -767,15 +763,15 @@ public class LoginJframe extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_searchAuthorActionPerformed
 
-    private void btnSortAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSortAmountActionPerformed
+    private void sortByAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortByAmountActionPerformed
         Collections.sort(bookManager.listBook, new AmountComparator());
         showListBooks();
-    }//GEN-LAST:event_btnSortAmountActionPerformed
+    }//GEN-LAST:event_sortByAmountActionPerformed
 
-    private void btnReverseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReverseActionPerformed
+    private void reverseListBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reverseListBookActionPerformed
         Collections.reverse(bookManager.listBook);
         showListBooks();
-    }//GEN-LAST:event_btnReverseActionPerformed
+    }//GEN-LAST:event_reverseListBookActionPerformed
 
     private void getGenericActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getGenericActionPerformed
         String messageContent = "Book Generic: ";
@@ -783,7 +779,7 @@ public class LoginJframe extends javax.swing.JFrame {
         messageMain.setText(messageContent);
     }//GEN-LAST:event_getGenericActionPerformed
 
-    private void btnShowAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowAmountActionPerformed
+    private void getAmountSumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getAmountSumActionPerformed
         int amountSum = 0;
         for (Book book : bookManager.listBook) {
             amountSum += book.getAmount();
@@ -791,11 +787,10 @@ public class LoginJframe extends javax.swing.JFrame {
         String messageContent = "Book amount sum: ";
         messageContent += String.valueOf(amountSum);
         messageMain.setText(messageContent);
-    }//GEN-LAST:event_btnShowAmountActionPerformed
+    }//GEN-LAST:event_getAmountSumActionPerformed
 
-    
     public static void main(String args[]) {
-        
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -818,7 +813,7 @@ public class LoginJframe extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 LoginJframe frame = new LoginJframe();
-                frame.setSize(1000, 800);
+                frame.setSize(750, 670);
                 frame.setVisible(true);
             }
         });
@@ -826,20 +821,15 @@ public class LoginJframe extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog RegisterDialog;
+    private javax.swing.JButton addBook;
     private javax.swing.JLabel address;
     private javax.swing.JTextField amountField;
+    private javax.swing.JButton backLogin;
     private javax.swing.JLabel book;
-    private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnLogin;
-    private javax.swing.JButton btnRegister;
-    private javax.swing.JButton btnReverse;
-    private javax.swing.JButton btnSearch;
-    private javax.swing.JButton btnSetBook;
-    private javax.swing.JButton btnShowAmount;
-    private javax.swing.JButton btnSortAmount;
-    private javax.swing.JButton btnSortAuthor;
     private javax.swing.JLabel email;
+    private javax.swing.JButton getAmountSum;
     private javax.swing.JButton getGeneric;
+    private javax.swing.JButton goRegister;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -854,7 +844,7 @@ public class LoginJframe extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JButton loginBtn;
+    private javax.swing.JButton login;
     private javax.swing.JTextField loginEmailField;
     private javax.swing.JPasswordField loginPassword1Field;
     private javax.swing.JDialog mainDialog;
@@ -866,15 +856,20 @@ public class LoginJframe extends javax.swing.JFrame {
     private javax.swing.JLabel password1;
     private javax.swing.JLabel password2;
     private javax.swing.JLabel phoneNumber;
+    private javax.swing.JButton register;
     private javax.swing.JTextArea registerAddressField;
-    private javax.swing.JButton registerBtn;
     private javax.swing.JTextField registerEmailField;
     private javax.swing.JPasswordField registerPassword1Field;
     private javax.swing.JPasswordField registerPassword2Field;
     private javax.swing.JTextField registerPhoneNumberField;
-    private javax.swing.JButton remove;
+    private javax.swing.JButton removeBook;
+    private javax.swing.JButton reverseListBook;
     private javax.swing.JButton searchAuthor;
+    private javax.swing.JButton searchBook;
     private javax.swing.JTextField searchField;
+    private javax.swing.JButton setBook;
+    private javax.swing.JButton sortByAmount;
+    private javax.swing.JButton sortByAuthor;
     private javax.swing.JButton sortByName;
     private javax.swing.JTable tableBooks;
     private javax.swing.JLabel tittle;

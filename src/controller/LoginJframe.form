@@ -11,19 +11,19 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="123" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
+                  <EmptySpace pref="126" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="63" max="32767" attributes="0"/>
+                  <EmptySpace pref="40" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -50,9 +50,9 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                              <Component id="registerBtn" min="-2" max="-2" attributes="0"/>
+                                              <Component id="register" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
-                                              <Component id="loginBtn" min="-2" max="-2" attributes="0"/>
+                                              <Component id="backLogin" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
                                           </Group>
                                           <Component id="jScrollPane1" max="32767" attributes="0"/>
@@ -120,8 +120,8 @@
                               <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="registerBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="loginBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="register" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="backLogin" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="message" min="-2" max="-2" attributes="0"/>
@@ -149,7 +149,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="password2">
               <Properties>
-                <Property name="text" type="java.lang.String" value=" Password :"/>
+                <Property name="text" type="java.lang.String" value="Password :"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="tittle">
@@ -184,20 +184,20 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="loginBtn">
+            <Component class="javax.swing.JButton" name="backLogin">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Login"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="loginBtnActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backLoginActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="registerBtn">
+            <Component class="javax.swing.JButton" name="register">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Register"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="registerBtnActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="registerActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JPasswordField" name="registerPassword2Field">
@@ -218,22 +218,21 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                           <Component id="jScrollPane2" min="-2" pref="378" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="210" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="232" max="-2" attributes="0"/>
                           <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
                           <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -243,10 +242,15 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
-                      <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" alignment="0" min="-2" pref="324" max="-2" attributes="0"/>
@@ -270,7 +274,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="searchField" min="-2" pref="235" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="btnSearch" min="-2" max="-2" attributes="0"/>
+                      <Component id="searchBook" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="searchAuthor" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="297" max="32767" attributes="0"/>
@@ -282,7 +286,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace pref="34" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnSearch" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="searchBook" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="searchField" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="searchAuthor" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -292,12 +296,12 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="btnSearch">
+            <Component class="javax.swing.JButton" name="searchBook">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Search Book"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSearchActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchBookActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="searchField">
@@ -334,15 +338,15 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="remove" min="-2" max="-2" attributes="0"/>
+                              <Component id="removeBook" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="btnAdd" min="-2" max="-2" attributes="0"/>
+                              <Component id="addBook" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnSetBook" min="-2" max="-2" attributes="0"/>
+                              <Component id="setBook" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="109" max="32767" attributes="0"/>
                           </Group>
                           <Component id="amountField" max="32767" attributes="0"/>
@@ -357,13 +361,13 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="sortByName" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnSortAuthor" min="-2" max="-2" attributes="0"/>
+                              <Component id="sortByAuthor" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnSortAmount" min="-2" max="-2" attributes="0"/>
+                              <Component id="sortByAmount" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
-                              <Component id="btnReverse" min="-2" max="-2" attributes="0"/>
+                              <Component id="reverseListBook" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -391,18 +395,18 @@
                       </Group>
                       <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnAdd" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnSetBook" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="remove" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="addBook" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="setBook" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="removeBook" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnSortAuthor" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnSortAmount" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="sortByAuthor" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="sortByAmount" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="sortByName" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="8" max="32767" attributes="0"/>
-                      <Component id="btnReverse" min="-2" max="-2" attributes="0"/>
+                      <Component id="reverseListBook" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -428,12 +432,12 @@
                 <Property name="text" type="java.lang.String" value="Amount :"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnAdd">
+            <Component class="javax.swing.JButton" name="addBook">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Add"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addBookActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="nameBookFeild">
@@ -442,36 +446,36 @@
             </Component>
             <Component class="javax.swing.JTextField" name="amountField">
             </Component>
-            <Component class="javax.swing.JButton" name="btnSetBook">
+            <Component class="javax.swing.JButton" name="setBook">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Set Book"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSetBookActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="setBookActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="remove">
+            <Component class="javax.swing.JButton" name="removeBook">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Remove"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="removeActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="removeBookActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnSortAuthor">
+            <Component class="javax.swing.JButton" name="sortByAuthor">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sort Author"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSortAuthorActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sortByAuthorActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnSortAmount">
+            <Component class="javax.swing.JButton" name="sortByAmount">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sort Amount"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSortAmountActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sortByAmountActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="sortByName">
@@ -482,12 +486,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sortByNameActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnReverse">
+            <Component class="javax.swing.JButton" name="reverseListBook">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Reverse"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReverseActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reverseListBookActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -572,7 +576,7 @@
                       <Component id="messageMain" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="122" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="btnShowAmount" min="-2" max="-2" attributes="0"/>
+                          <Component id="getAmountSum" min="-2" max="-2" attributes="0"/>
                           <Component id="getGeneric" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
@@ -587,7 +591,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="getGeneric" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnShowAmount" min="-2" max="-2" attributes="0"/>
+                              <Component id="getAmountSum" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
@@ -608,12 +612,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="getGenericActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnShowAmount">
+            <Component class="javax.swing.JButton" name="getAmountSum">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Show Amount"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnShowAmountActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="getAmountSumActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="messageMain">
@@ -671,9 +675,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="btnLogin" min="-2" max="-2" attributes="0"/>
+                  <Component id="login" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                  <Component id="btnRegister" min="-2" max="-2" attributes="0"/>
+                  <Component id="goRegister" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
               </Group>
               <Group type="102" attributes="0">
@@ -719,8 +723,8 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btnRegister" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnLogin" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="goRegister" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="login" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                       </Group>
@@ -751,21 +755,21 @@
         </Component>
         <Component class="javax.swing.JPasswordField" name="loginPassword1Field">
         </Component>
-        <Component class="javax.swing.JButton" name="btnLogin">
+        <Component class="javax.swing.JButton" name="login">
           <Properties>
             <Property name="text" type="java.lang.String" value="Login"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLoginActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="loginActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnRegister">
+        <Component class="javax.swing.JButton" name="goRegister">
           <Properties>
             <Property name="text" type="java.lang.String" value="Register"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegisterActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="goRegisterActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="messageLogin">
