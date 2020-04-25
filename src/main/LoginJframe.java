@@ -57,7 +57,7 @@ public class LoginJframe extends javax.swing.JFrame {
         addListBookFromDataToArray();
         showListBooks();
         fileService.writeFileUserToArray(userManager.listUser, USER_DATA_PATH);
-        //fileService.writeFileStudentToArray(studentManager.listStudents, STUDENT_DATA_PATH);
+        fileService.writeFileStudentToArray(studentManager.listStudents, STUDENT_DATA_PATH);
     }
 
     @SuppressWarnings("unchecked")
@@ -131,7 +131,9 @@ public class LoginJframe extends javax.swing.JFrame {
         studentBookField = new javax.swing.JTextField();
         borrowBook = new javax.swing.JButton();
         giveBackBook = new javax.swing.JButton();
-        messageBorrow = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        borrowedTable = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -744,6 +746,29 @@ public class LoginJframe extends javax.swing.JFrame {
 
         giveBackBook.setText("Give back");
 
+        borrowedTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Book"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(borrowedTable);
+
+        jButton1.setText("Save");
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -751,37 +776,38 @@ public class LoginJframe extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addComponent(jLabel14)
-                                .addGap(53, 53, 53)
-                                .addComponent(studentBookField))
+                                .addGap(75, 75, 75)
+                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel8Layout.createSequentialGroup()
+                                        .addComponent(jLabel14)
+                                        .addGap(53, 53, 53)
+                                        .addComponent(studentBookField))
+                                    .addGroup(jPanel8Layout.createSequentialGroup()
+                                        .addComponent(jLabel13)
+                                        .addGap(59, 59, 59)
+                                        .addComponent(studentIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addGap(59, 59, 59)
-                                .addComponent(studentIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(67, 67, 67)
-                        .addComponent(messageBorrow, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(143, 143, 143)
-                        .addComponent(borrowBook)
-                        .addGap(57, 57, 57)
-                        .addComponent(giveBackBook)))
-                .addContainerGap(122, Short.MAX_VALUE))
+                                .addGap(143, 143, 143)
+                                .addComponent(borrowBook)
+                                .addGap(57, 57, 57)
+                                .addComponent(giveBackBook)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(42, 42, 42)))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13)
-                            .addComponent(studentIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(messageBorrow)))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(studentIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
@@ -790,7 +816,12 @@ public class LoginJframe extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(borrowBook)
                     .addComponent(giveBackBook))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addComponent(jButton1)
+                .addContainerGap(227, Short.MAX_VALUE))
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout mainDialogLayout = new javax.swing.GroupLayout(mainDialog.getContentPane());
@@ -815,10 +846,10 @@ public class LoginJframe extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(saveBookData, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20))))
-            .addGroup(mainDialogLayout.createSequentialGroup()
-                .addGap(256, 256, 256)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainDialogLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(257, 257, 257))
         );
         mainDialogLayout.setVerticalGroup(
             mainDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -837,7 +868,7 @@ public class LoginJframe extends javax.swing.JFrame {
                         .addGroup(mainDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane2))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -1005,6 +1036,19 @@ public class LoginJframe extends javax.swing.JFrame {
         for (Book book : bookManager.listBook) {
             defaultTableModel.addRow(new Object[]{book.getName(), book.getAuthor(), book.getAmount()});
         }
+    }
+
+    public void showTableBooksFromArray(ArrayList<String> borrowedBooks) {
+        DefaultTableModel defaultTableModel = new DefaultTableModel();
+        //khac ten bang
+        borrowedTable.setModel(defaultTableModel);
+        defaultTableModel.addColumn("Name book");
+        //lay list cua student
+
+        for (String nameBook : borrowedBooks) {
+            defaultTableModel.addRow(new Object[]{nameBook});
+        }
+
     }
 
     public void addListBookFromDataToArray() {
@@ -1333,9 +1377,9 @@ public class LoginJframe extends javax.swing.JFrame {
         String id = newStudentID.getText();
         String name = studentName.getText();
         Student student = new Student(id, name);
-        studentManager = StudentManager.getStudentManager();
+        //   studentManager = StudentManager.getStudentManager();
         studentManager.addStudent(student);
-      //  fileService.saveStudentToFile(studentManager.listStudents, STUDENT_DATA_PATH);
+        fileService.saveStudentToFile(studentManager.listStudents, STUDENT_DATA_PATH);
         messageStudent.setText("dang ky thanh cong");
     }//GEN-LAST:event_addMemberActionPerformed
 
@@ -1353,19 +1397,33 @@ public class LoginJframe extends javax.swing.JFrame {
     private void borrowBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrowBookActionPerformed
         String StudentID = studentIDField.getText();
         String nameBook = studentBookField.getText();
-        studentManager.borrowBook(StudentID, nameBook);
-        for (Book myBook : bookManager.listBook) {
-            if (myBook.getName().equals(nameBook)) {
-                bookManager.removeBook(myBook);
-                showListBooks();
+        boolean isBookAlive = bookManager.isBookExist(nameBook);
+        boolean isStudentAlive = studentManager.isStudentExist(StudentID);
+        if (isStudentAlive && isBookAlive) {
+            boolean isBorrow = studentManager.borrowBook(StudentID, nameBook);
+            if (isBorrow) {
+                for (Book myBook : bookManager.listBook) {
+                    if (myBook.getName().equals(nameBook)) {
+                        myBook.setAmount(myBook.getAmount() - 1);
+                        if (myBook.getAmount() == 0) {
+                            bookManager.removeBook(myBook);
+                        }
+                        showListBooks();
+                        break;
+                    }
+                }
+                ArrayList<String> borrowBooks = studentManager.getBorrowedBookOfStudent(StudentID);
+                
+                //show ra bang
+                showTableBooksFromArray(borrowBooks);
+            } else {
+                JOptionPane.showMessageDialog(this, "sach da duoc muon roi, khong muon duoc nua");
             }
+
+        } else {
+            JOptionPane.showMessageDialog(this, "ID or Book invalid !!");
         }
-        ArrayList<String> borrowBooks = studentManager.getBorrowedBookOfStudent(StudentID);
-        String content = "";
-        for (String nameBorrowBook : borrowBooks) {
-            content += nameBorrowBook + " ; ";
-        }
-        messageBorrow.setText(content);
+
     }//GEN-LAST:event_borrowBookActionPerformed
 
     public static void main(String args[]) {
@@ -1408,12 +1466,14 @@ public class LoginJframe extends javax.swing.JFrame {
     private javax.swing.JButton backToLogin;
     private javax.swing.JLabel book;
     private javax.swing.JButton borrowBook;
+    private javax.swing.JTable borrowedTable;
     private javax.swing.JLabel email;
     private javax.swing.JButton getAmountSum;
     private javax.swing.JButton getGeneric;
     private javax.swing.JButton giveBackBook;
     private javax.swing.JButton goRegister;
     private javax.swing.JButton goToRegisterStudent;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1441,12 +1501,12 @@ public class LoginJframe extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton login;
     private javax.swing.JTextField loginEmailField;
     private javax.swing.JPasswordField loginPassword1Field;
     private javax.swing.JDialog mainDialog;
     private javax.swing.JLabel message;
-    private javax.swing.JLabel messageBorrow;
     private javax.swing.JLabel messageLogin;
     private javax.swing.JLabel messageMain;
     private javax.swing.JLabel messageStudent;

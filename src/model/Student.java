@@ -15,7 +15,7 @@ public class Student {
 
     private String studentID;
     private String name;
-    private ArrayList<String> borrowBooks;
+    private ArrayList<String> borrowBooks = new ArrayList<>();
 
     public Student() {
 
