@@ -45,7 +45,7 @@ public class BookManager {
 
     public boolean isBookExist(String nameBook) {
         for (Book book : listBook) {
-            if (book.getName().equals(nameBook)) {
+            if (book.getName().equalsIgnoreCase(nameBook)) {
                 return true;
             }
         }

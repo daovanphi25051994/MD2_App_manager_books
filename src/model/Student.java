@@ -41,7 +41,7 @@ public class Student implements Serializable {
 
     public boolean borrowBook(String nameBook) {
         for (String myBook : borrowBooks) {
-            if (myBook.equals(nameBook)) {
+            if (myBook.equalsIgnoreCase(nameBook)) {
                 return false;
             }
         }
@@ -51,8 +51,8 @@ public class Student implements Serializable {
 
     public boolean giveBackBook(String nameBook) {
         for (String myBook : borrowBooks) {
-            if (myBook.equals(nameBook)) {
-                borrowBooks.remove(nameBook);
+            if (myBook.equalsIgnoreCase(nameBook)) {
+                borrowBooks.remove(myBook);
                 return true;
             }
         }

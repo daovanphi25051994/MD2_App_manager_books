@@ -39,7 +39,7 @@ public class StudentManager {
 
    public ArrayList<String> getBorrowedBookOfStudent(String studentID){
        for(Student student : listStudents){
-           if(student.getID().equals(studentID)){
+           if(student.getID().equalsIgnoreCase(studentID)){
               return student.getBorrowBooks();
            }
        }
@@ -48,7 +48,7 @@ public class StudentManager {
 
     public boolean isStudentExist(String studentID) {
         for (Student student : listStudents) {
-            if (student.getID().equals(studentID)) {
+            if (student.getID().equalsIgnoreCase(studentID)) {
                 return true;
             }
         }
@@ -57,7 +57,7 @@ public class StudentManager {
     
      public boolean  borrowBook(String studentID, String bookName){
         for(Student student : listStudents){
-            if (student.getID().equals(studentID)) {
+            if (student.getID().equalsIgnoreCase(studentID)) {
               return student.borrowBook(bookName); 
                
             }
@@ -67,7 +67,7 @@ public class StudentManager {
     
     public boolean giveBackBook(String studentID, String bookName){
         for(Student student : listStudents){
-            if (student.getID().equals(studentID)) {
+            if (student.getID().equalsIgnoreCase(studentID)) {
              return student.giveBackBook(bookName);               
             }
         }
