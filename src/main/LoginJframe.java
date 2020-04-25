@@ -134,6 +134,7 @@ public class LoginJframe extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         borrowedTable = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        showBorrowedBook = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -745,6 +746,11 @@ public class LoginJframe extends javax.swing.JFrame {
         });
 
         giveBackBook.setText("Give back");
+        giveBackBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                giveBackBookActionPerformed(evt);
+            }
+        });
 
         borrowedTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -768,6 +774,13 @@ public class LoginJframe extends javax.swing.JFrame {
         jScrollPane3.setViewportView(borrowedTable);
 
         jButton1.setText("Save");
+
+        showBorrowedBook.setText("show");
+        showBorrowedBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showBorrowedBookActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -800,6 +813,10 @@ public class LoginJframe extends javax.swing.JFrame {
                         .addGap(42, 42, 42)))
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(showBorrowedBook)
+                .addGap(270, 270, 270))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -818,7 +835,9 @@ public class LoginJframe extends javax.swing.JFrame {
                     .addComponent(giveBackBook))
                 .addGap(34, 34, 34)
                 .addComponent(jButton1)
-                .addContainerGap(227, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(showBorrowedBook)
+                .addContainerGap(171, Short.MAX_VALUE))
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -849,7 +868,7 @@ public class LoginJframe extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainDialogLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(257, 257, 257))
+                .addGap(245, 245, 245))
         );
         mainDialogLayout.setVerticalGroup(
             mainDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1040,11 +1059,8 @@ public class LoginJframe extends javax.swing.JFrame {
 
     public void showTableBooksFromArray(ArrayList<String> borrowedBooks) {
         DefaultTableModel defaultTableModel = new DefaultTableModel();
-        //khac ten bang
         borrowedTable.setModel(defaultTableModel);
         defaultTableModel.addColumn("Name book");
-        //lay list cua student
-
         for (String nameBook : borrowedBooks) {
             defaultTableModel.addRow(new Object[]{nameBook});
         }
@@ -1405,17 +1421,13 @@ public class LoginJframe extends javax.swing.JFrame {
                 for (Book myBook : bookManager.listBook) {
                     if (myBook.getName().equals(nameBook)) {
                         myBook.setAmount(myBook.getAmount() - 1);
-                        if (myBook.getAmount() == 0) {
-                            bookManager.removeBook(myBook);
-                        }
                         showListBooks();
                         break;
                     }
                 }
                 ArrayList<String> borrowBooks = studentManager.getBorrowedBookOfStudent(StudentID);
-                
-                //show ra bang
                 showTableBooksFromArray(borrowBooks);
+                studentBookField.setText("");
             } else {
                 JOptionPane.showMessageDialog(this, "sach da duoc muon roi, khong muon duoc nua");
             }
@@ -1425,6 +1437,34 @@ public class LoginJframe extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_borrowBookActionPerformed
+
+    private void giveBackBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_giveBackBookActionPerformed
+        String StudentID = studentIDField.getText();
+        String nameBook = studentBookField.getText();
+        boolean isStudentAlive = studentManager.isStudentExist(StudentID);
+        boolean isGiveBack = studentManager.giveBackBook(StudentID, nameBook);
+        if (isStudentAlive && isGiveBack) {
+            for (Book myBook : bookManager.listBook) {
+                if (myBook.getName().equals(nameBook)) {
+                    myBook.setAmount(myBook.getAmount() + 1);
+                    showListBooks();
+                    break;
+                }
+            }
+            ArrayList<String> borrowBooks = studentManager.getBorrowedBookOfStudent(StudentID);
+            showTableBooksFromArray(borrowBooks);
+            studentBookField.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "ID or Book invalid !!");
+        }
+
+    }//GEN-LAST:event_giveBackBookActionPerformed
+
+    private void showBorrowedBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showBorrowedBookActionPerformed
+        String StudentID = studentIDField.getText();
+         ArrayList<String> borrowBooks = studentManager.getBorrowedBookOfStudent(StudentID);
+            showTableBooksFromArray(borrowBooks);
+    }//GEN-LAST:event_showBorrowedBookActionPerformed
 
     public static void main(String args[]) {
 
@@ -1530,6 +1570,7 @@ public class LoginJframe extends javax.swing.JFrame {
     private javax.swing.JButton searchBook;
     private javax.swing.JTextField searchField;
     private javax.swing.JButton setBook;
+    private javax.swing.JButton showBorrowedBook;
     private javax.swing.JButton sortByAmount;
     private javax.swing.JButton sortByAuthor;
     private javax.swing.JButton sortByName;
