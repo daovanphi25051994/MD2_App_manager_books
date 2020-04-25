@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 import main.LoginJframe;
 import static main.LoginJframe.STUDENT_DATA_PATH;
 import model.Student;
-import model.User;
+import model.Admin;
 
 /**
  *

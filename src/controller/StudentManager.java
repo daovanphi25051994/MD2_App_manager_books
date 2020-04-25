@@ -8,7 +8,7 @@ package controller;
 import java.util.ArrayList;
 import model.Book;
 import model.Student;
-import model.User;
+import model.Admin;
 
 /**
  *

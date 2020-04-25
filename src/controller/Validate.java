@@ -82,7 +82,7 @@ public class Validate {
         return false;
     }
     
-    public boolean isUser(String email, String password1, String password2, String phoneNumber) {
+    public boolean isAdmin(String email, String password1, String password2, String phoneNumber) {
         boolean isValidateEmail = validateEmail(email);
         boolean isValidatePassword1 = validatePassword(password1);
         boolean isValidatePhoneNumber = validatePhoneNumber(phoneNumber);

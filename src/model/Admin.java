@@ -11,15 +11,15 @@ import java.io.Serializable;
  *
  * @author samsung
  */
-public class User implements Serializable {
+public class Admin implements Serializable {
     private String email;
     private String password;
     private String phoneNumber;
     private String address;
     
-    public User(){}
+    public Admin(){}
     
-    public User(String email, String password, String phoneNumber,String address){
+    public Admin(String email, String password, String phoneNumber,String address){
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;

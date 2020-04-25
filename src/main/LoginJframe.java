@@ -23,8 +23,8 @@ import controller.BookManager;
 import controller.FileService;
 import controller.NameComparator;
 import controller.StudentManager;
-import model.User;
-import controller.UserManager;
+import model.Admin;
+import controller.AdminManager;
 import controller.Validate;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -32,15 +32,15 @@ import javax.swing.JOptionPane;
 import model.Student;
 
 public class LoginJframe extends javax.swing.JFrame {
-    
+
     private StudentManager studentManager = StudentManager.getStudentManager();
-    private UserManager userManager = UserManager.getUserManager();
+    private AdminManager adminManager = AdminManager.getAdminManager();
     private BookManager bookManager = BookManager.getBookManager();
     private Validate validate = new Validate();
     private FileService fileService = new FileService();
-    public static final String BOOK_DATA_PATH = "/home/samsung/NetBeansProjects/JavaApplication1/src/data/book_data2.txt";
-    public static final String USER_DATA_PATH = "/home/samsung/NetBeansProjects/JavaApplication1/src/data/user_data2.txt";
-    public static final String STUDENT_DATA_PATH = "student_data.txt";
+    public static final String BOOK_DATA_PATH = "/home/samsung/NetBeansProjects/JavaApplication1/src/data/book_data.txt";
+    public static final String ADMIN_DATA_PATH = "/home/samsung/NetBeansProjects/JavaApplication1/src/data/admin_data.txt";
+    public static final String STUDENT_DATA_PATH = "/home/samsung/NetBeansProjects/JavaApplication1/src/data/student_data.txt";
     public static final String NAME_BOOK_LABEL = "Name book";
     public static final String NAME_AUTHOR_LABEL = "Name Author";
     public static final String AMOUNT_LABEL = "Amount";
@@ -50,15 +50,27 @@ public class LoginJframe extends javax.swing.JFrame {
     public static final String LOGIN_FAILED_MESSAGE = "Login Failed!!";
     public static final String BOOK_GENERIC_MESSAGE = "Book Generic: ";
     public static final String BOOK_AMOUNT_MESSAGE = "Book amount sum: ";
-    
+
     public LoginJframe() {
         initComponents();
         fileService.addDataToArrayListFromFile(bookManager.listBook, BOOK_DATA_PATH);
         fileService.addDataToArrayListFromFile(studentManager.listStudents, STUDENT_DATA_PATH);
-        fileService.addDataToArrayListFromFile(userManager.listUser, USER_DATA_PATH);
+        fileService.addDataToArrayListFromFile(adminManager.listAdmins, ADMIN_DATA_PATH);
+        for(Book book : bookManager.listBook){
+            System.out.println(book.toString());
+        }
+        System.out.println("");
+        for(Student student : studentManager.listStudents){
+            System.out.println(student.toString());
+        }
+        System.out.println("");
+        for(Admin admin : adminManager.listAdmins){
+            System.out.println(admin.toString());
+        }
+        System.out.println("");
         showLibraryFromListBooks();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -1097,7 +1109,7 @@ public class LoginJframe extends javax.swing.JFrame {
             defaultTableModel.addRow(new Object[]{book.getName(), book.getAuthor(), book.getAmount()});
         }
     }
-    
+
     public void showTableBooksFromArray(ArrayList<String> borrowedBooks) {
         DefaultTableModel defaultTableModel = new DefaultTableModel();
         borrowedTable.setModel(defaultTableModel);
@@ -1105,9 +1117,17 @@ public class LoginJframe extends javax.swing.JFrame {
         for (String nameBook : borrowedBooks) {
             defaultTableModel.addRow(new Object[]{nameBook});
         }
-        
     }
-    
+
+    public void saveData() {
+        int isYesConfirm = JOptionPane.showConfirmDialog(this, "Do you want save as change ?", "Confirm", JOptionPane.YES_NO_OPTION);
+        if (isYesConfirm == JOptionPane.YES_OPTION) {
+            fileService.saveArrayListToFileData(bookManager.listBook, BOOK_DATA_PATH);
+            fileService.saveArrayListToFileData(studentManager.listStudents, STUDENT_DATA_PATH);
+            fileService.saveArrayListToFileData(adminManager.listAdmins, ADMIN_DATA_PATH);
+        }
+    }
+
     public void searchBook() {
         String name = searchField.getText();
         for (Book myBook : bookManager.listBook) {
@@ -1127,23 +1147,7 @@ public class LoginJframe extends javax.swing.JFrame {
             }
         }
     }
-    
-    public void login() {
-        String email = loginEmailField.getText();
-        String password = String.valueOf(loginPassword1Field.getPassword());
-        for (User myUser : userManager.listUser) {
-            if (myUser.getEmail().equals(email) && myUser.getPassword().equals(password)) {
-                messageLogin.setText(LOGIN_SUCCESS_MESSAGE);
-                mainDialog.setSize(1200, 850);
-                mainDialog.setVisible(true);
-                loginEmailField.setText("");
-                loginPassword1Field.setText("");
-                return;
-            }
-        }
-        messageLogin.setText(LOGIN_FAILED_MESSAGE);
-    }
-    
+
     public void searchListBook() {
         String name = searchField.getText();
         DefaultTableModel defaultTableModel = new DefaultTableModel();
@@ -1157,15 +1161,7 @@ public class LoginJframe extends javax.swing.JFrame {
             }
         }
     }
-    
-    public String[] getBookDataFromUser() {
-        String nameBook = nameBookFeild.getText();
-        String author = nameAuthorFeild.getText();
-        String amount = amountField.getText();
-        String[] bookData = {nameBook, author, amount};
-        return bookData;
-    }
-    
+
     public void searchAuthor() {
         String author = searchField.getText();
         DefaultTableModel defaultTableModel = new DefaultTableModel();
@@ -1184,43 +1180,37 @@ public class LoginJframe extends javax.swing.JFrame {
             showLibraryFromListBooks();
         }
     }
-    
-    public void addStudent() {
-        String id = newStudentID.getText();
-        String name = studentName.getText();       
-        boolean isStudent = validate.isStudent(id, name);
-        boolean isStudentAlive = studentManager.isStudentExist(id);
-        if(isStudent){
-             if (!isStudentAlive) {
-            Student student = new Student(id, name);
-            studentManager.addStudent(student);
-            messageStudent.setText("dang ky thanh cong");
-            newStudentID.setText("");
-            studentName.setText("");
-        } else {
-            messageStudent.setText("id da ton tai");
+
+    public void login() {
+        String email = loginEmailField.getText();
+        String password = String.valueOf(loginPassword1Field.getPassword());
+        for (Admin admin : adminManager.listAdmins) {
+            if (admin.getEmail().equals(email) && admin.getPassword().equals(password)) {
+                messageLogin.setText(LOGIN_SUCCESS_MESSAGE);
+                mainDialog.setSize(1200, 850);
+                mainDialog.setVisible(true);
+                loginEmailField.setText("");
+                loginPassword1Field.setText("");
+                return;
+            }
         }
-        }else{
-            messageStudent.setText("sai dinh dang");
-        }
-       
+        messageLogin.setText(LOGIN_FAILED_MESSAGE);
     }
-    
-    public void saveData() {
-        int isYesConfirm = JOptionPane.showConfirmDialog(this, "Do you want save as change ?", "Confirm", JOptionPane.YES_NO_OPTION);
-        if (isYesConfirm == JOptionPane.YES_OPTION) {
-            fileService.saveArrayListToFileData(bookManager.listBook, BOOK_DATA_PATH);
-            fileService.saveArrayListToFileData(studentManager.listStudents, STUDENT_DATA_PATH);
-            fileService.saveArrayListToFileData(userManager.listUser, USER_DATA_PATH);
-        }
+
+    public String[] getBookDataFromUser() {
+        String nameBook = nameBookFeild.getText();
+        String author = nameAuthorFeild.getText();
+        String amount = amountField.getText();
+        String[] bookData = {nameBook, author, amount};
+        return bookData;
     }
-    
+
     public void resetBookFiled() {
         nameBookFeild.setText("");
         nameAuthorFeild.setText("");
         amountField.setText("");
     }
-    
+
     public void resetRegisterTextField() {
         registerEmailField.setText("");
         registerPassword1Field.setText("");
@@ -1235,17 +1225,38 @@ public class LoginJframe extends javax.swing.JFrame {
         String password2 = String.valueOf(registerPassword2Field.getPassword());
         String phoneNumber = registerPhoneNumberField.getText();
         String address = registerAddressField.getText();
-        boolean isUser = validate.isUser(email, password1, password2, phoneNumber);
-        if (isUser && !userManager.isUserExist(email)) {
-            User user = new User(email, password1, phoneNumber, address);
-            userManager.addUser(user);
+        boolean isUser = validate.isAdmin(email, password1, password2, phoneNumber);
+        if (isUser && !adminManager.isAdminExist(email)) {
+            Admin user = new Admin(email, password1, phoneNumber, address);
+            adminManager.addAdmin(user);
             resetRegisterTextField();
             message.setText(REGISTER_SUCCESS_MESSAGE);
         } else {
             message.setText(REGISTER_FAILED_MESSAGE);
         }
     }
-    
+
+    public void addStudent() {
+        String id = newStudentID.getText();
+        String name = studentName.getText();
+        boolean isStudent = validate.isStudent(id, name);
+        boolean isStudentAlive = studentManager.isStudentExist(id);
+        if (isStudent) {
+            if (!isStudentAlive) {
+                Student student = new Student(id, name);
+                studentManager.addStudent(student);
+                messageStudent.setText("dang ky thanh cong");
+                newStudentID.setText("");
+                studentName.setText("");
+            } else {
+                messageStudent.setText("id da ton tai");
+            }
+        } else {
+            messageStudent.setText("sai dinh dang");
+        }
+
+    }
+
     public void addBook() {
         String[] bookData = getBookDataFromUser();
         boolean isBook = validate.isBook(bookData[0], bookData[1], bookData[2]);
@@ -1267,7 +1278,7 @@ public class LoginJframe extends javax.swing.JFrame {
         }
         JOptionPane.showMessageDialog(this, "sai dinh dang sach!!");
     }
-    
+
     public void setBook() {
         String[] bookData = getBookDataFromUser();
         boolean isBook = validate.isBook(bookData[0], bookData[1], bookData[2]);
@@ -1292,7 +1303,7 @@ public class LoginJframe extends javax.swing.JFrame {
         }
         JOptionPane.showMessageDialog(this, "khong tim thay name book");
     }
-    
+
     public void removeBook() {
         String keyName = nameBookFeild.getText();
         for (Book myBook : bookManager.listBook) {
@@ -1309,6 +1320,79 @@ public class LoginJframe extends javax.swing.JFrame {
             }
         }
         JOptionPane.showMessageDialog(this, "khong tim thay sach");
+    }
+
+    public void showAmountSumBook() {
+        int amountSum = 0;
+        for (Book book : bookManager.listBook) {
+            amountSum += book.getAmount();
+        }
+        String messageContent = BOOK_AMOUNT_MESSAGE;
+        messageContent += String.valueOf(amountSum);
+        messageMain.setText(messageContent);
+    }
+
+    public void borrowBook() {
+        String StudentID = studentIDField.getText();
+        String nameBook = studentBookField.getText();
+        boolean isBookAlive = bookManager.isBookExist(nameBook);
+        boolean isStudentAlive = studentManager.isStudentExist(StudentID);
+        if (isStudentAlive && isBookAlive) {
+            for (Book myBook : bookManager.listBook) {
+                if (myBook.getName().equalsIgnoreCase(nameBook)) {
+                    if (myBook.getAmount() == 0) {
+                        JOptionPane.showMessageDialog(this, "sach da duoc muon het");
+                        return;
+                    }
+                    boolean isBorrow = studentManager.borrowBook(StudentID, nameBook);
+                    if (isBorrow) {
+                        myBook.setAmount(myBook.getAmount() - 1);
+                        showLibraryFromListBooks();
+                        ArrayList<String> borrowBooks = studentManager.getBorrowedBookOfStudent(StudentID);
+                        showTableBooksFromArray(borrowBooks);
+                        studentBookField.setText("");
+                        return;
+                    } else {
+                        JOptionPane.showMessageDialog(this, "sach da duoc muon roi, khong muon duoc nua");
+                        return;
+                    }
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "ID or Book invalid !!");
+        }
+
+    }
+
+    public void giveBackBook() {
+        String StudentID = studentIDField.getText();
+        String nameBook = studentBookField.getText();
+        boolean isStudentAlive = studentManager.isStudentExist(StudentID);
+        boolean isGiveBack = studentManager.giveBackBook(StudentID, nameBook);
+        if (isStudentAlive && isGiveBack) {
+            for (Book myBook : bookManager.listBook) {
+                if (myBook.getName().equalsIgnoreCase(nameBook)) {
+                    myBook.setAmount(myBook.getAmount() + 1);
+                    showLibraryFromListBooks();
+                    break;
+                }
+            }
+            ArrayList<String> borrowBooks = studentManager.getBorrowedBookOfStudent(StudentID);
+            showTableBooksFromArray(borrowBooks);
+            studentBookField.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "ID or Book invalid !!");
+        }
+    }
+
+    public void showBorrowedBook() {
+        String StudentID = studentIDField.getText();
+        ArrayList<String> borrowBooks = studentManager.getBorrowedBookOfStudent(StudentID);
+        if (borrowBooks == null) {
+            JOptionPane.showMessageDialog(this, "khong tim thay id");
+            return;
+        }
+        showTableBooksFromArray(borrowBooks);
     }
 
     private void goRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goRegisterActionPerformed
@@ -1375,13 +1459,7 @@ public class LoginJframe extends javax.swing.JFrame {
     }//GEN-LAST:event_getGenericActionPerformed
 
     private void getAmountSumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getAmountSumActionPerformed
-        int amountSum = 0;
-        for (Book book : bookManager.listBook) {
-            amountSum += book.getAmount();
-        }
-        String messageContent = BOOK_AMOUNT_MESSAGE;
-        messageContent += String.valueOf(amountSum);
-        messageMain.setText(messageContent);
+        showAmountSumBook();
     }//GEN-LAST:event_getAmountSumActionPerformed
 
     private void saveBookDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBookDataActionPerformed
@@ -1425,75 +1503,23 @@ public class LoginJframe extends javax.swing.JFrame {
     }//GEN-LAST:event_goToRegisterStudentActionPerformed
 
     private void borrowBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrowBookActionPerformed
-        String StudentID = studentIDField.getText();
-        String nameBook = studentBookField.getText();
-        boolean isBookAlive = bookManager.isBookExist(nameBook);
-        boolean isStudentAlive = studentManager.isStudentExist(StudentID);
-        if (isStudentAlive && isBookAlive) {
-            for (Book myBook : bookManager.listBook) {
-                if (myBook.getName().equalsIgnoreCase(nameBook)) {
-                    if (myBook.getAmount() == 0) {
-                        JOptionPane.showMessageDialog(this, "sach da duoc muon het");
-                        return;
-                    }
-                    boolean isBorrow = studentManager.borrowBook(StudentID, nameBook);
-                    if (isBorrow) {
-                        myBook.setAmount(myBook.getAmount() - 1);
-                        showLibraryFromListBooks();
-                        ArrayList<String> borrowBooks = studentManager.getBorrowedBookOfStudent(StudentID);
-                        showTableBooksFromArray(borrowBooks);
-                        studentBookField.setText("");
-                        return;
-                    } else {
-                        JOptionPane.showMessageDialog(this, "sach da duoc muon roi, khong muon duoc nua");
-                        return;
-                    }
-                }
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "ID or Book invalid !!");
-        }
-
+        borrowBook();
     }//GEN-LAST:event_borrowBookActionPerformed
 
     private void giveBackBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_giveBackBookActionPerformed
-        String StudentID = studentIDField.getText();
-        String nameBook = studentBookField.getText();
-        boolean isStudentAlive = studentManager.isStudentExist(StudentID);
-        boolean isGiveBack = studentManager.giveBackBook(StudentID, nameBook);
-        if (isStudentAlive && isGiveBack) {
-            for (Book myBook : bookManager.listBook) {
-                if (myBook.getName().equalsIgnoreCase(nameBook)) {
-                    myBook.setAmount(myBook.getAmount() + 1);
-                    showLibraryFromListBooks();
-                    break;
-                }
-            }
-            ArrayList<String> borrowBooks = studentManager.getBorrowedBookOfStudent(StudentID);
-            showTableBooksFromArray(borrowBooks);
-            studentBookField.setText("");
-        } else {
-            JOptionPane.showMessageDialog(this, "ID or Book invalid !!");
-        }
-
+        giveBackBook();
     }//GEN-LAST:event_giveBackBookActionPerformed
 
     private void showBorrowedBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showBorrowedBookActionPerformed
-        String StudentID = studentIDField.getText();
-        ArrayList<String> borrowBooks = studentManager.getBorrowedBookOfStudent(StudentID);
-        if(borrowBooks == null){
-            JOptionPane.showMessageDialog(this, "khong tim thay id");
-            return;
-        }
-        showTableBooksFromArray(borrowBooks);
+        showBorrowedBook();
     }//GEN-LAST:event_showBorrowedBookActionPerformed
 
     private void studentNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_studentNameActionPerformed
-    
+
     public static void main(String args[]) {
-        
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
