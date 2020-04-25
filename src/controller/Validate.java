@@ -22,7 +22,8 @@ public class Validate {
     public static final String REGEX_NAME_BOOK = "^[A-Za-z0-9\\s]+$";
     public static final String REGEX_AUTHOR = "^[A-Za-z\\s]+$";
     public static final String REGEX_AMOUNT = "^[1-9][0-9]*$";
-    
+    public static final String REGEX_STUDENT_ID = "^[a-zA-Z0-9_]+$";
+     public static final String REGEX_STUDENT_NAME = "^[a-zA-Z\\s]+$";
     public boolean validateEmail(String string) {
         pattern = Pattern.compile(REGEX_EMAIL);
         matcher = pattern.matcher(string);
@@ -59,6 +60,18 @@ public class Validate {
         return matcher.matches();
     }
     
+    public boolean validateStudentID(String string) {
+        pattern = Pattern.compile(REGEX_STUDENT_ID);
+        matcher = pattern.matcher(string);
+        return matcher.matches();
+    }
+    
+    public boolean validateStudentName(String string) {
+        pattern = Pattern.compile(REGEX_STUDENT_NAME);
+        matcher = pattern.matcher(string);
+        return matcher.matches();
+    }
+    
     public boolean isBook(String name, String author, String amount) {
         boolean isValidateName = validateBookName(name);
         boolean isValidateAuthor = validateAuthorName(author);
@@ -74,6 +87,15 @@ public class Validate {
         boolean isValidatePassword1 = validatePassword(password1);
         boolean isValidatePhoneNumber = validatePhoneNumber(phoneNumber);
         if (isValidateEmail && isValidatePassword1 && isValidatePhoneNumber && password1.equals(password2)) {
+            return true;
+        }
+        return false;
+    }
+    
+     public boolean isStudent(String id, String name) {
+        boolean isValidateID = validateStudentID(id);
+        boolean isValidateName = validateStudentName(name);
+        if (isValidateID && isValidateName) {
             return true;
         }
         return false;

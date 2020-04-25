@@ -72,6 +72,8 @@ public class LoginJframe extends javax.swing.JFrame {
         studentName = new javax.swing.JTextField();
         messageStudent = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
         backToLogin = new javax.swing.JButton();
         RegisterDialog = new javax.swing.JDialog();
         jPanel1 = new javax.swing.JPanel();
@@ -179,6 +181,12 @@ public class LoginJframe extends javax.swing.JFrame {
         jLabel16.setForeground(new java.awt.Color(55, 197, 1));
         jLabel16.setText("Register Member");
 
+        jLabel18.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel18.setText("*");
+
+        jLabel19.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel19.setText("*");
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -186,9 +194,14 @@ public class LoginJframe extends javax.swing.JFrame {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(52, 52, 52)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel15))
-                .addGap(32, 32, 32)
+                    .addComponent(jLabel15)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel18)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel19)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(newStudentID, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(studentName, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -214,11 +227,13 @@ public class LoginJframe extends javax.swing.JFrame {
                 .addGap(43, 43, 43)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(newStudentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel18))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(studentName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15))
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel19))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(addMember)
                 .addGap(18, 18, 18)
@@ -974,6 +989,7 @@ public class LoginJframe extends javax.swing.JFrame {
         });
 
         messageLogin.setFont(new java.awt.Font("Ubuntu", 3, 18)); // NOI18N
+        messageLogin.setForeground(new java.awt.Color(0, 255, 8));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -1171,17 +1187,23 @@ public class LoginJframe extends javax.swing.JFrame {
     
     public void addStudent() {
         String id = newStudentID.getText();
-        String name = studentName.getText();
+        String name = studentName.getText();       
+        boolean isStudent = validate.isStudent(id, name);
         boolean isStudentAlive = studentManager.isStudentExist(id);
-        if (!isStudentAlive) {
+        if(isStudent){
+             if (!isStudentAlive) {
             Student student = new Student(id, name);
             studentManager.addStudent(student);
             messageStudent.setText("dang ky thanh cong");
             newStudentID.setText("");
             studentName.setText("");
         } else {
-            JOptionPane.showMessageDialog(this, "id da ton tai");
+            messageStudent.setText("id da ton tai");
         }
+        }else{
+            messageStudent.setText("sai dinh dang");
+        }
+       
     }
     
     public void saveData() {
@@ -1459,6 +1481,10 @@ public class LoginJframe extends javax.swing.JFrame {
     private void showBorrowedBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showBorrowedBookActionPerformed
         String StudentID = studentIDField.getText();
         ArrayList<String> borrowBooks = studentManager.getBorrowedBookOfStudent(StudentID);
+        if(borrowBooks == null){
+            JOptionPane.showMessageDialog(this, "khong tim thay id");
+            return;
+        }
         showTableBooksFromArray(borrowBooks);
     }//GEN-LAST:event_showBorrowedBookActionPerformed
 
@@ -1522,6 +1548,8 @@ public class LoginJframe extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
