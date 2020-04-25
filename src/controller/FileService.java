@@ -15,6 +15,8 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import main.LoginJframe;
+import static main.LoginJframe.STUDENT_DATA_PATH;
 import model.Student;
 import model.User;
 
@@ -22,112 +24,54 @@ import model.User;
  *
  * @author samsung
  */
-public class FileService {
+public class FileService<T> {
 
-    public void saveUserToFile(ArrayList<User> listUsers, String targetPath) {
+    public void saveArrayListToFileData(ArrayList<T> list, String targetPath) {
         FileOutputStream fileOutputStream = null;
         ObjectOutputStream objectOutputStream = null;
         try {
             fileOutputStream = new FileOutputStream(targetPath);
             objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            for (User user : listUsers) {
-                objectOutputStream.writeObject(user);
+            for (T object : list) {
+                objectOutputStream.writeObject(object);
             }
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(FileService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginJframe.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(FileService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginJframe.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 objectOutputStream.close();
                 fileOutputStream.close();
             } catch (IOException ex) {
-                Logger.getLogger(FileService.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(LoginJframe.class.getName()).log(Level.SEVERE, null, ex);
             }
-
         }
-
-    }
-    
-    public void saveStudentToFile(ArrayList<Student> listStudents, String targetPath) {
-        FileOutputStream fileOutputStream = null;
-        ObjectOutputStream objectOutputStream = null;
-        try {
-            fileOutputStream = new FileOutputStream(targetPath);
-            objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            for (Student student : listStudents) {
-                objectOutputStream.writeObject(student);
-            }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(FileService.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(FileService.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                objectOutputStream.close();
-                fileOutputStream.close();
-            } catch (IOException ex) {
-                Logger.getLogger(FileService.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        }
-
     }
 
-    public void writeFileUserToArray(ArrayList<User> listUsers, String sourcePath) {
+    public void addDataToArrayListFromFile(ArrayList<T> list, String sourcePath) {
         FileInputStream fileInputStream = null;
         ObjectInputStream objectInputStream = null;
         try {
             fileInputStream = new FileInputStream(sourcePath);
             objectInputStream = new ObjectInputStream(fileInputStream);
-            User user;
-            while ((user = (User) objectInputStream.readObject()) != null) {
-                listUsers.add(user);
+            T object;
+            while ((object = (T) objectInputStream.readObject()) != null) {
+                list.add(object);
             }
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(FileService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginJframe.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(FileService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginJframe.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FileService.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginJframe.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 objectInputStream.close();
                 fileInputStream.close();
             } catch (IOException ex) {
-                Logger.getLogger(FileService.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(LoginJframe.class.getName()).log(Level.SEVERE, null, ex);
             }
-
         }
-
     }
-    
-    public void writeFileStudentToArray(ArrayList<Student> listStudents, String sourcePath) {
-        FileInputStream fileInputStream = null;
-        ObjectInputStream objectInputStream = null;
-        try {
-            fileInputStream = new FileInputStream(sourcePath);
-            objectInputStream = new ObjectInputStream(fileInputStream);
-            Student student;
-            while ((student = (Student) objectInputStream.readObject()) != null) {
-                listStudents.add(student);
-            }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(FileService.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(FileService.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(FileService.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                objectInputStream.close();
-                fileInputStream.close();
-            } catch (IOException ex) {
-                Logger.getLogger(FileService.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        }
-
-    }
-
 }

@@ -17,7 +17,7 @@ import model.User;
 public class StudentManager {
 
     private static StudentManager studentManager;
-    public static final ArrayList<Student> listStudents = new ArrayList<>();
+    public static ArrayList<Student> listStudents = new ArrayList<>();
 
     private StudentManager() {
     }

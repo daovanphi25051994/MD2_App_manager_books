@@ -40,7 +40,7 @@ public class LoginJframe extends javax.swing.JFrame {
     private FileService fileService = new FileService();
     public static final String BOOK_DATA_PATH = "/home/samsung/NetBeansProjects/JavaApplication1/src/data/book_data2.txt";
     public static final String USER_DATA_PATH = "/home/samsung/NetBeansProjects/JavaApplication1/src/data/user_data2.txt";
-    public static final String STUDENT_DATA_PATH = "/home/samsung/NetBeansProjects/JavaApplication1/src/data/student_data2.txt";
+    public static final String STUDENT_DATA_PATH = "student_data.txt";
 
     public static final String NAME_BOOK_LABEL = "Name book";
     public static final String NAME_AUTHOR_LABEL = "Name Author";
@@ -54,10 +54,10 @@ public class LoginJframe extends javax.swing.JFrame {
 
     public LoginJframe() {
         initComponents();
-        addListBookFromDataToArray();
-        showListBooks();
-        fileService.writeFileUserToArray(userManager.listUser, USER_DATA_PATH);
-        fileService.writeFileStudentToArray(studentManager.listStudents, STUDENT_DATA_PATH);
+        fileService.addDataToArrayListFromFile(bookManager.listBook, BOOK_DATA_PATH);
+        fileService.addDataToArrayListFromFile(studentManager.listStudents, STUDENT_DATA_PATH);
+        fileService.addDataToArrayListFromFile(userManager.listUser, USER_DATA_PATH);
+        showLibraryFromListBooks();
     }
 
     @SuppressWarnings("unchecked")
@@ -133,7 +133,6 @@ public class LoginJframe extends javax.swing.JFrame {
         giveBackBook = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         borrowedTable = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
         showBorrowedBook = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -440,11 +439,6 @@ public class LoginJframe extends javax.swing.JFrame {
             }
         });
 
-        searchField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchFieldActionPerformed(evt);
-            }
-        });
         searchField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 searchFieldKeyPressed(evt);
@@ -773,8 +767,6 @@ public class LoginJframe extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(borrowedTable);
 
-        jButton1.setText("Save");
-
         showBorrowedBook.setText("show");
         showBorrowedBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -789,28 +781,22 @@ public class LoginJframe extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(75, 75, 75)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addGap(75, 75, 75)
-                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel8Layout.createSequentialGroup()
-                                        .addComponent(jLabel14)
-                                        .addGap(53, 53, 53)
-                                        .addComponent(studentBookField))
-                                    .addGroup(jPanel8Layout.createSequentialGroup()
-                                        .addComponent(jLabel13)
-                                        .addGap(59, 59, 59)
-                                        .addComponent(studentIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jLabel14)
+                                .addGap(53, 53, 53)
+                                .addComponent(studentBookField))
                             .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addGap(143, 143, 143)
-                                .addComponent(borrowBook)
-                                .addGap(57, 57, 57)
-                                .addComponent(giveBackBook)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(42, 42, 42)))
+                                .addComponent(jLabel13)
+                                .addGap(59, 59, 59)
+                                .addComponent(studentIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(143, 143, 143)
+                        .addComponent(borrowBook)
+                        .addGap(57, 57, 57)
+                        .addComponent(giveBackBook)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
@@ -833,9 +819,7 @@ public class LoginJframe extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(borrowBook)
                     .addComponent(giveBackBook))
-                .addGap(34, 34, 34)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
+                .addGap(90, 90, 90)
                 .addComponent(showBorrowedBook)
                 .addContainerGap(171, Short.MAX_VALUE))
             .addGroup(jPanel8Layout.createSequentialGroup()
@@ -916,11 +900,6 @@ public class LoginJframe extends javax.swing.JFrame {
             }
         });
 
-        loginPassword1Field.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginPassword1FieldActionPerformed(evt);
-            }
-        });
         loginPassword1Field.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 loginPassword1FieldKeyPressed(evt);
@@ -1046,7 +1025,7 @@ public class LoginJframe extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void showListBooks() {
+    public void showLibraryFromListBooks() {
         DefaultTableModel defaultTableModel = new DefaultTableModel();
         tableBooks.setModel(defaultTableModel);
         defaultTableModel.addColumn(NAME_BOOK_LABEL);
@@ -1067,32 +1046,6 @@ public class LoginJframe extends javax.swing.JFrame {
 
     }
 
-    public void addListBookFromDataToArray() {
-        FileInputStream fileInputStream = null;
-        ObjectInputStream objectInputStream = null;
-        try {
-            fileInputStream = new FileInputStream(BOOK_DATA_PATH);
-            objectInputStream = new ObjectInputStream(fileInputStream);
-            Book book;
-            while ((book = (Book) objectInputStream.readObject()) != null) {
-                bookManager.addBook(book);
-            }
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(LoginJframe.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(LoginJframe.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LoginJframe.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                objectInputStream.close();
-                fileInputStream.close();
-            } catch (IOException ex) {
-                Logger.getLogger(LoginJframe.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-
     public void searchBook() {
         String name = searchField.getText();
         for (Book myBook : bookManager.listBook) {
@@ -1108,7 +1061,7 @@ public class LoginJframe extends javax.swing.JFrame {
                 amountField.setText(String.valueOf(myBook.getAmount()));
                 break;
             } else {
-                showListBooks();
+                showLibraryFromListBooks();
             }
         }
     }
@@ -1164,33 +1117,16 @@ public class LoginJframe extends javax.swing.JFrame {
             }
         }
         if (!isAuthor) {
-            showListBooks();
+            showLibraryFromListBooks();
         }
     }
 
-    public void saveBookData() {
+    public void saveData() {
         int isYesConfirm = JOptionPane.showConfirmDialog(this, "Do you want save as change ?", "Confirm", JOptionPane.YES_NO_OPTION);
         if (isYesConfirm == JOptionPane.YES_OPTION) {
-            FileOutputStream fileOutputStream = null;
-            ObjectOutputStream objectOutputStream = null;
-            try {
-                fileOutputStream = new FileOutputStream(BOOK_DATA_PATH);
-                objectOutputStream = new ObjectOutputStream(fileOutputStream);
-                for (Book book : bookManager.listBook) {
-                    objectOutputStream.writeObject(book);
-                }
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(LoginJframe.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(LoginJframe.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                try {
-                    objectOutputStream.close();
-                    fileOutputStream.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(LoginJframe.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+            fileService.saveArrayListToFileData(bookManager.listBook, BOOK_DATA_PATH);
+            fileService.saveArrayListToFileData(studentManager.listStudents, STUDENT_DATA_PATH);
+            fileService.saveArrayListToFileData(userManager.listUser, USER_DATA_PATH);
         }
     }
 
@@ -1210,7 +1146,6 @@ public class LoginJframe extends javax.swing.JFrame {
         if (isUser && !userManager.isUserExist(email)) {
             User user = new User(email, password1, phoneNumber, address);
             userManager.addUser(user);
-            fileService.saveUserToFile(userManager.listUser, USER_DATA_PATH);
             message.setText(REGISTER_SUCCESS_MESSAGE);
         } else {
             message.setText(REGISTER_FAILED_MESSAGE);
@@ -1229,7 +1164,7 @@ public class LoginJframe extends javax.swing.JFrame {
             if (isYesConfirm == JOptionPane.YES_OPTION) {
                 Book book = new Book(bookData[0], bookData[1], Integer.parseInt(bookData[2]));
                 bookManager.addBook(book);
-                showListBooks();
+                showLibraryFromListBooks();
                 resetBookFiled();
                 return;
             } else {
@@ -1249,7 +1184,7 @@ public class LoginJframe extends javax.swing.JFrame {
                     if (isYesConfirm == JOptionPane.YES_OPTION) {
                         myBook.setAuthor(bookData[1]);
                         myBook.setAmount(Integer.parseInt(bookData[2]));
-                        showListBooks();
+                        showLibraryFromListBooks();
                         resetBookFiled();
                         return;
                     } else {
@@ -1271,7 +1206,7 @@ public class LoginJframe extends javax.swing.JFrame {
                 int isYesConfirm = JOptionPane.showConfirmDialog(this, "Do you want delete book ?", "Confirm", JOptionPane.YES_NO_OPTION);
                 if (isYesConfirm == JOptionPane.YES_OPTION) {
                     bookManager.removeBook(myBook);
-                    showListBooks();
+                    showLibraryFromListBooks();
                     resetBookFiled();
                     return;
                 } else {
@@ -1317,12 +1252,12 @@ public class LoginJframe extends javax.swing.JFrame {
 
     private void sortByNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortByNameActionPerformed
         Collections.sort(bookManager.listBook, new NameComparator());
-        showListBooks();
+        showLibraryFromListBooks();
     }//GEN-LAST:event_sortByNameActionPerformed
 
     private void sortByAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortByAuthorActionPerformed
         Collections.sort(bookManager.listBook, new AuthorComparator());
-        showListBooks();
+        showLibraryFromListBooks();
     }//GEN-LAST:event_sortByAuthorActionPerformed
 
     private void searchAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchAuthorActionPerformed
@@ -1331,12 +1266,12 @@ public class LoginJframe extends javax.swing.JFrame {
 
     private void sortByAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortByAmountActionPerformed
         Collections.sort(bookManager.listBook, new AmountComparator());
-        showListBooks();
+        showLibraryFromListBooks();
     }//GEN-LAST:event_sortByAmountActionPerformed
 
     private void reverseListBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reverseListBookActionPerformed
         Collections.reverse(bookManager.listBook);
-        showListBooks();
+        showLibraryFromListBooks();
     }//GEN-LAST:event_reverseListBookActionPerformed
 
     private void getGenericActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getGenericActionPerformed
@@ -1356,7 +1291,7 @@ public class LoginJframe extends javax.swing.JFrame {
     }//GEN-LAST:event_getAmountSumActionPerformed
 
     private void saveBookDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBookDataActionPerformed
-        saveBookData();
+        saveData();
     }//GEN-LAST:event_saveBookDataActionPerformed
 
     private void searchFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchFieldKeyPressed
@@ -1381,22 +1316,19 @@ public class LoginJframe extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_loginPassword1FieldKeyPressed
 
-    private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchFieldActionPerformed
-
-    private void loginPassword1FieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginPassword1FieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_loginPassword1FieldActionPerformed
-
     private void addMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMemberActionPerformed
         String id = newStudentID.getText();
         String name = studentName.getText();
-        Student student = new Student(id, name);
-        //   studentManager = StudentManager.getStudentManager();
-        studentManager.addStudent(student);
-        fileService.saveStudentToFile(studentManager.listStudents, STUDENT_DATA_PATH);
-        messageStudent.setText("dang ky thanh cong");
+        boolean isStudentAlive = studentManager.isStudentExist(id);
+        if (!isStudentAlive) {
+            Student student = new Student(id, name);
+            studentManager.addStudent(student);
+            messageStudent.setText("dang ky thanh cong");
+            newStudentID.setText("");
+            studentName.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "id da ton tai");
+        }
     }//GEN-LAST:event_addMemberActionPerformed
 
     private void backToLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToLoginActionPerformed
@@ -1407,7 +1339,6 @@ public class LoginJframe extends javax.swing.JFrame {
         RegisterDialog.setVisible(false);
         registerMemberDialog.setSize(750, 670);
         registerMemberDialog.setVisible(true);
-
     }//GEN-LAST:event_goToRegisterStudentActionPerformed
 
     private void borrowBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrowBookActionPerformed
@@ -1416,22 +1347,26 @@ public class LoginJframe extends javax.swing.JFrame {
         boolean isBookAlive = bookManager.isBookExist(nameBook);
         boolean isStudentAlive = studentManager.isStudentExist(StudentID);
         if (isStudentAlive && isBookAlive) {
-            boolean isBorrow = studentManager.borrowBook(StudentID, nameBook);
-            if (isBorrow) {
-                for (Book myBook : bookManager.listBook) {
-                    if (myBook.getName().equals(nameBook)) {
+            for (Book myBook : bookManager.listBook) {
+                if (myBook.getName().equals(nameBook)) {
+                    if (myBook.getAmount() == 0) {
+                        JOptionPane.showMessageDialog(this, "sach da duoc muon het");
+                        return;
+                    }
+                    boolean isBorrow = studentManager.borrowBook(StudentID, nameBook);
+                    if (isBorrow) {
                         myBook.setAmount(myBook.getAmount() - 1);
-                        showListBooks();
-                        break;
+                        showLibraryFromListBooks();
+                        ArrayList<String> borrowBooks = studentManager.getBorrowedBookOfStudent(StudentID);
+                        showTableBooksFromArray(borrowBooks);
+                        studentBookField.setText("");
+                        return;
+                    } else {
+                        JOptionPane.showMessageDialog(this, "sach da duoc muon roi, khong muon duoc nua");
+                        return;
                     }
                 }
-                ArrayList<String> borrowBooks = studentManager.getBorrowedBookOfStudent(StudentID);
-                showTableBooksFromArray(borrowBooks);
-                studentBookField.setText("");
-            } else {
-                JOptionPane.showMessageDialog(this, "sach da duoc muon roi, khong muon duoc nua");
             }
-
         } else {
             JOptionPane.showMessageDialog(this, "ID or Book invalid !!");
         }
@@ -1447,7 +1382,7 @@ public class LoginJframe extends javax.swing.JFrame {
             for (Book myBook : bookManager.listBook) {
                 if (myBook.getName().equals(nameBook)) {
                     myBook.setAmount(myBook.getAmount() + 1);
-                    showListBooks();
+                    showLibraryFromListBooks();
                     break;
                 }
             }
@@ -1462,8 +1397,8 @@ public class LoginJframe extends javax.swing.JFrame {
 
     private void showBorrowedBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showBorrowedBookActionPerformed
         String StudentID = studentIDField.getText();
-         ArrayList<String> borrowBooks = studentManager.getBorrowedBookOfStudent(StudentID);
-            showTableBooksFromArray(borrowBooks);
+        ArrayList<String> borrowBooks = studentManager.getBorrowedBookOfStudent(StudentID);
+        showTableBooksFromArray(borrowBooks);
     }//GEN-LAST:event_showBorrowedBookActionPerformed
 
     public static void main(String args[]) {
@@ -1513,7 +1448,6 @@ public class LoginJframe extends javax.swing.JFrame {
     private javax.swing.JButton giveBackBook;
     private javax.swing.JButton goRegister;
     private javax.swing.JButton goToRegisterStudent;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
