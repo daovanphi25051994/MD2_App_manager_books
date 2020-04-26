@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.util.ArrayList;
@@ -10,10 +5,6 @@ import model.Book;
 import model.Student;
 import model.Admin;
 
-/**
- *
- * @author samsung
- */
 public class StudentManager {
 
     private static StudentManager studentManager;
@@ -37,14 +28,14 @@ public class StudentManager {
         return true;
     }
 
-   public ArrayList<String> getBorrowedBookOfStudent(String studentID){
-       for(Student student : listStudents){
-           if(student.getID().equalsIgnoreCase(studentID)){
-              return student.getBorrowBooks();
-           }
-       }
-       return null;
-   }
+    public ArrayList<String> getBorrowedBookOfStudent(String studentID) {
+        for (Student student : listStudents) {
+            if (student.getID().equalsIgnoreCase(studentID)) {
+                return student.getBorrowBooks();
+            }
+        }
+        return null;
+    }
 
     public boolean isStudentExist(String studentID) {
         for (Student student : listStudents) {
@@ -54,24 +45,24 @@ public class StudentManager {
         }
         return false;
     }
-    
-     public boolean  borrowBook(String studentID, String bookName){
-        for(Student student : listStudents){
+
+    public boolean borrowBook(String studentID, String bookName) {
+        for (Student student : listStudents) {
             if (student.getID().equalsIgnoreCase(studentID)) {
-              return student.borrowBook(bookName); 
-               
+                return student.borrowBook(bookName);
+
             }
         }
         return false;
     }
-    
-    public boolean giveBackBook(String studentID, String bookName){
-        for(Student student : listStudents){
+
+    public boolean giveBackBook(String studentID, String bookName) {
+        for (Student student : listStudents) {
             if (student.getID().equalsIgnoreCase(studentID)) {
-             return student.giveBackBook(bookName);               
+                return student.giveBackBook(bookName);
             }
         }
-       return false;
+        return false;
     }
-    
+
 }

@@ -1,30 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.util.ArrayList;
 import model.Admin;
 
-/**
- *
- * @author samsung
- */
 public class AdminManager {
 
-    private static AdminManager userManager;
+    private static AdminManager adminManager;
     public static final ArrayList<Admin> listAdmins = new ArrayList<>();
 
     private AdminManager() {
     }
 
     public static AdminManager getAdminManager() {
-        if (userManager == null) {
-            userManager = new AdminManager();
+        if (adminManager == null) {
+            adminManager = new AdminManager();
         }
-        return userManager;
+        return adminManager;
     }
 
     public boolean addAdmin(Admin user) {
@@ -45,7 +36,6 @@ public class AdminManager {
                 return true;
             }
         }
-
         return false;
     }
 

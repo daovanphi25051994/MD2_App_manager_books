@@ -4,19 +4,16 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/samsung/NetBeansProjects/JavaApplication1/src/controller/FileService.java</file>
-            <file>file:/home/samsung/NetBeansProjects/JavaApplication1/src/main/LoginJframe.java</file>
-            <file>file:/home/samsung/NetBeansProjects/JavaApplication1/src/data/student_data2.txt</file>
-            <file>file:/home/samsung/NetBeansProjects/JavaApplication1/src/data/book_data2.txt</file>
-            <file>file:/home/samsung/NetBeansProjects/JavaApplication1/src/model/Book.java</file>
-            <file>file:/home/samsung/NetBeansProjects/JavaApplication1/src/controller/AuthorComparator.java</file>
             <file>file:/home/samsung/NetBeansProjects/JavaApplication1/src/controller/BookManager.java</file>
             <file>file:/home/samsung/NetBeansProjects/JavaApplication1/src/controller/NameComparator.java</file>
-            <file>file:/home/samsung/NetBeansProjects/JavaApplication1/src/data/user_data2.txt</file>
-            <file>file:/home/samsung/NetBeansProjects/JavaApplication1/src/model/User.java</file>
             <file>file:/home/samsung/NetBeansProjects/JavaApplication1/src/controller/StudentManager.java</file>
-            <file>file:/home/samsung/NetBeansProjects/JavaApplication1/src/controller/UserManager.java</file>
+            <file>file:/home/samsung/NetBeansProjects/JavaApplication1/src/main/LoginJframe.java</file>
+            <file>file:/home/samsung/NetBeansProjects/JavaApplication1/src/controller/AdminManager.java</file>
+            <file>file:/home/samsung/NetBeansProjects/JavaApplication1/src/model/Admin.java</file>
             <file>file:/home/samsung/NetBeansProjects/JavaApplication1/src/model/Student.java</file>
             <file>file:/home/samsung/NetBeansProjects/JavaApplication1/src/controller/Validate.java</file>
+            <file>file:/home/samsung/NetBeansProjects/JavaApplication1/src/model/Book.java</file>
+            <file>file:/home/samsung/NetBeansProjects/JavaApplication1/src/controller/AuthorComparator.java</file>
             <file>file:/home/samsung/NetBeansProjects/JavaApplication1/src/controller/AmountComparator.java</file>
         </group>
     </open-files>
